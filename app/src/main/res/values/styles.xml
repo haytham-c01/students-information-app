@@ -1,0 +1,23 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="login_edit_text_style">
+        <item name="android:paddingVertical" tools:targetApi="o">@dimen/edit_text_vertical_padding</item>
+        <item name="android:paddingStart">@dimen/edit_text_icon_padding</item>
+        <item name="android:textSize">@dimen/login_edit_text_size</item>
+        <item name="android:drawablePadding">@dimen/loginDrawablePadding</item>
+        <item name="android:background">@drawable/bg_login_edit_text</item>
+        <item name="android:elevation">@dimen/login_edit_text_elevation</item>
+        <item name="fontFamily">@font/merriweather_regular</item>
+        <item name="android:outlineSpotShadowColor" tools:targetApi="p">@color/colorPrimaryDark</item>
+        <item name="android:outlineAmbientShadowColor" tools:targetApi="p">@color/colorPrimaryDark</item>
+    </style>
+
+</resources>
