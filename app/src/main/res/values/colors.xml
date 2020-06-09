@@ -12,4 +12,6 @@
     <color name="colorLightRed">#E63946</color>
     <color name="colorShadow">#29000000</color>
 
+    <color name="colorDefaultBackground">#FAFAFA</color>
+
 </resources>

@@ -10,8 +10,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context=".ui.login.LoginActivity">
+    android:paddingBottom="@dimen/activity_vertical_margin">
 
 
     <androidx.constraintlayout.widget.Guideline
@@ -23,21 +22,14 @@
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/appTitleText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:shadowColor="@color/colorShadow"
-        android:shadowDy="9"
-        android:shadowRadius="12"
-        android:text="Welcome to \nResu"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="48sp"
-        app:fontFamily="@font/lemon_regular"
+        android:text="@string/welcome_msg"
         app:layout_constraintBottom_toTopOf="@id/appDescriptionText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="spread_inside" />
+        app:layout_constraintVertical_chainStyle="spread_inside"
+        style="@style/authenticationTitleStyle" />
 
 
     <com.google.android.material.textview.MaterialTextView
@@ -46,7 +38,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:fontFamily="@font/merriweather_regular"
-        android:text="Student Data Management App"
+        android:text="@string/login_app_desc"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/logo"
         app:layout_constraintEnd_toEndOf="parent"
@@ -104,7 +96,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:fontFamily="@font/merriweather_regular"
-        android:text="Forgot Password?"
+        android:text="@string/action_forgot_password"
         android:textSize="12sp"
         app:layout_constraintBottom_toTopOf="@+id/login"
         app:layout_constraintEnd_toEndOf="@+id/password"
@@ -112,39 +104,23 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="start"
         android:layout_marginTop="32dp"
         android:layout_marginBottom="64dp"
-        android:background="@drawable/bg_button"
-        android:drawableEnd="@drawable/ic_arrow_right"
-        android:drawablePadding="8dp"
-        android:elevation="12dp"
-        android:enabled="false"
-        android:outlineAmbientShadowColor="@color/colorPrimaryDark"
-        android:outlineProvider="background"
-        android:outlineSpotShadowColor="@color/colorPrimaryDark"
-        android:paddingStart="28dp"
-        android:paddingEnd="20dp"
-        android:text="@string/sign_in"
-        android:textAllCaps="false"
-        android:textColor="@android:color/white"
-        android:textSize="18sp"
+        android:text="@string/action_sign_in_short"
         app:layout_constraintBottom_toTopOf="@id/signUpText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/forgotPasswordText"
-        app:layout_constraintVertical_bias="0.2" />
+        app:layout_constraintVertical_bias="0.2"
+        style="@style/authentication_btn_style" />
 
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/noAccountText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/merriweather_regular"
-        android:text="Don't have an account?"
+        android:text="@string/no_account_msg"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/signUpText"
         app:layout_constraintEnd_toStartOf="@id/signUpText"
@@ -159,8 +135,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:alpha="0.87"
-        android:fontFamily="@font/merriweather_regular"
-        android:text="Sign Up"
+        android:text="@string/action_sign_up"
         android:textAllCaps="true"
         android:textColor="@color/colorPrimary"
         android:textSize="12sp"

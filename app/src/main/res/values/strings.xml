@@ -1,12 +1,22 @@
 <resources>
-    <string name="app_name">Graduation Project</string>
+    <string name="app_name">Resu</string>
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
-    <string name="sign_in">Sign in</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="welcome">"Welcome !"</string>
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
+    <string name="action_sign_up">Sign up</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="transition_logo">appLogoTransition</string>
+    <string name="welcome_msg">Welcome to \nResu</string>
+    <string name="login_app_desc">Student Data Management App</string>
+    <string name="action_forgot_password">Forgot Password?</string>
+    <string name="no_account_msg">Don\'t have an account?</string>
+    <string name="username_hint">Username</string>
+    <string name="repeat_password_hint">Repeat password</string>
 </resources>
