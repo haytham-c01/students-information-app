@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_signInFragment_to_signUpFragment"
             app:destination="@id/signUpFragment" />
+        <action
+            android:id="@+id/action_signInFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
     <fragment
         android:id="@+id/splashScreenFragment"
@@ -28,4 +31,9 @@
         android:name="com.haytham.coder.graduationproject.SignUpFragment"
         android:label="SignUpFragment"
         tools:layout="@layout/fragment_sign_up"/>
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.haytham.coder.graduationproject.HomeFragment"
+        android:label="HomeFragment"
+        tools:layout="@layout/fragment_home"/>
 </navigation>

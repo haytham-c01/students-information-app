@@ -19,4 +19,5 @@
     <string name="no_account_msg">Don\'t have an account?</string>
     <string name="username_hint">Username</string>
     <string name="repeat_password_hint">Repeat password</string>
+    <string name="students">Students</string>
 </resources>

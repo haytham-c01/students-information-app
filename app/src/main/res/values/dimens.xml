@@ -14,4 +14,9 @@
     <dimen name="student_card_padding_v">8dp</dimen>
     <dimen name="student_card_text_size">12sp</dimen>
     <dimen name="student_card_icon_spacing">18dp</dimen>
+    <dimen name="student_card_icon_size">18dp</dimen>
+
+    <dimen name="students_list_half_spacing">6dp</dimen>
+    <dimen name="page_title_size">32sp</dimen>
+    <dimen name="card_elevation">4dp</dimen>
 </resources>
