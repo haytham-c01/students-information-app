@@ -1,19 +1,14 @@
-package com.haytham.coder.graduationproject
+package com.haytham.coder.graduationproject.ui.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
-import java.util.*
-import kotlin.concurrent.schedule
+import com.haytham.coder.graduationproject.R
 
 
-class SplashScreenFragment : Fragment() {
-
-     private val delay= 300L
-
+class SignUpFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -24,13 +19,7 @@ class SplashScreenFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-
-        Timer().schedule(delay) {
-            //val action=
-            //findNavController().navigate()
-        }
-
-        return inflater.inflate(R.layout.fragmet_splash_screen, container, false)
+        return inflater.inflate(R.layout.fragment_sign_up, container, false)
     }
 
 }

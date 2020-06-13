@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.haytham.coder.curveview.CurveView android:id="@+id/curveView"
+    android:layout_width="match_parent"
+    android:layout_height="250dp"
+    android:elevation="4dp"
+    app:endColor="@color/colorLightBlue2"
+    app:firstControlPointX="0.4"
+    app:firstControlPointY="1.2"
+    app:secondControlPointX="0.6"
+    app:secondControlPointY="1.2"
+    app:startColor="@color/colorPrimary"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android" />

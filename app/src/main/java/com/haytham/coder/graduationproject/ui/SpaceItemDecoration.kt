@@ -1,4 +1,4 @@
-package com.haytham.coder.graduationproject
+package com.haytham.coder.graduationproject.ui
 
 import android.graphics.Rect
 import android.view.View

@@ -1,15 +1,24 @@
-package com.haytham.coder.graduationproject
+package com.haytham.coder.graduationproject.ui.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.haytham.coder.graduationproject.R
+import com.haytham.coder.graduationproject.ui.SpacesItemDecoration
+import com.haytham.coder.graduationproject.ui.StudentsQuickAdapter
 import com.haytham.coder.graduationproject.databinding.FragmentHomeBinding
+import com.haytham.coder.graduationproject.ui.MainActivity
 
 
 class HomeFragment : Fragment() {
     private lateinit var dataBinding: FragmentHomeBinding
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        (activity as MainActivity).showBottomBar()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -21,8 +30,11 @@ class HomeFragment : Fragment() {
 
         val itemSpacing= resources.getDimension(R.dimen.students_list_half_spacing).toInt()
         dataBinding.studentsRecycler.apply {
-            addItemDecoration(SpacesItemDecoration(itemSpacing))
-            adapter= StudentsQuickAdapter().apply {
+            addItemDecoration(
+                SpacesItemDecoration(itemSpacing)
+            )
+            adapter= StudentsQuickAdapter()
+                .apply {
                 val data= MutableList(100){" "}
                 setNewInstance(data)
             }

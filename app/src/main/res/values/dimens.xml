@@ -19,4 +19,22 @@
     <dimen name="students_list_half_spacing">6dp</dimen>
     <dimen name="page_title_size">32sp</dimen>
     <dimen name="card_elevation">4dp</dimen>
+    <dimen name="my_action_bar_size">70dp</dimen>
+    <dimen name="search_view_hori_margin">36dp</dimen>
+    <dimen name="filter_page_padding">24dp</dimen>
+    <dimen name="radio_button_padding_end">12dp</dimen>
+    <dimen name="filter_divider_margin_top">32dp</dimen>
+    <dimen name="filter_section_title_margin_top">12dp</dimen>
+    <dimen name="filter_items_spacing">18dp</dimen>
+    <dimen name="spinner_title_text_size">16sp</dimen>
+    <dimen name="spinner_and_title_spacing">4dp</dimen>
+    <dimen name="profile_image_size">140dp</dimen>
+    <dimen name="profile_divider_horizontal_margin">48dp</dimen>
+    <dimen name="profile_content_margin">64dp</dimen>
+    <dimen name="profile_item_spacing">18dp</dimen>
+    <dimen name="profile_divider_vertical_margin">24dp</dimen>
+    <dimen name="add_student_page_padding">24dp</dimen>
+    <dimen name="add_student_page_section_spacing">32dp</dimen>
+    <dimen name="add_student_page_item_spacing">18dp</dimen>
+    <dimen name="add_student_btn_horizontal_margin">58dp</dimen>
 </resources>

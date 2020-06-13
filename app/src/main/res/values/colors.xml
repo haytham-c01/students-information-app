@@ -7,11 +7,18 @@
 
     <color name="colorBlue">#457B9D</color>
     <color name="colorLightBlue">#A8DADC</color>
+    <color name="colorLightBlue2">#8BBECA</color>
+
     <color name="colorDarkBlue">#1D3557</color>
     <color name="colorLightGreen">#F1FAEE</color>
     <color name="colorLightRed">#E63946</color>
     <color name="colorShadow">#29000000</color>
 
-    <color name="colorDefaultBackground">#FAFAFA</color>
 
+
+    <color name="colorDefaultBackground">#FAFAFA</color>
+    <color name="colorDefaultTabIcon">#99000000</color>
+    <color name="dividerColor">#1A707070</color>
+
+    <color name="colorOffWhite">#99FFFFFF</color>
 </resources>

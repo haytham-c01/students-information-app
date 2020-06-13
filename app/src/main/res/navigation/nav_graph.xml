@@ -7,19 +7,16 @@
 
     <fragment
         android:id="@+id/signInFragment"
-        android:name="com.haytham.coder.graduationproject.SignInFragment"
+        android:name="com.haytham.coder.graduationproject.ui.fragments.SignInFragment"
         android:label="SignInFragment"
         tools:layout="@layout/fragment_sign_in">
         <action
             android:id="@+id/action_signInFragment_to_signUpFragment"
             app:destination="@id/signUpFragment" />
-        <action
-            android:id="@+id/action_signInFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
     </fragment>
     <fragment
         android:id="@+id/splashScreenFragment"
-        android:name="com.haytham.coder.graduationproject.SplashScreenFragment"
+        android:name="com.haytham.coder.graduationproject.ui.fragments.SplashScreenFragment"
         android:label="SplashScreenFragment"
         tools:layout="@layout/fragmet_splash_screen">
         <action
@@ -28,12 +25,45 @@
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
-        android:name="com.haytham.coder.graduationproject.SignUpFragment"
+        android:name="com.haytham.coder.graduationproject.ui.fragments.SignUpFragment"
         android:label="SignUpFragment"
-        tools:layout="@layout/fragment_sign_up"/>
+        tools:layout="@layout/fragment_sign_up" />
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.haytham.coder.graduationproject.HomeFragment"
+        android:name="com.haytham.coder.graduationproject.ui.fragments.HomeFragment"
         android:label="HomeFragment"
-        tools:layout="@layout/fragment_home"/>
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.haytham.coder.graduationproject.ui.fragments.SearchFragment"
+        android:label="SearchFragment"
+        tools:layout="@layout/fragment_search" />
+    <action
+        android:id="@+id/action_global_homeFragment"
+        app:destination="@id/homeFragment"
+        app:popUpTo="@id/homeFragment"
+        app:popUpToInclusive="true" />
+    <action
+        android:id="@+id/action_global_searchFragment"
+        app:destination="@id/searchFragment"
+        app:popUpTo="@id/searchFragment"
+        app:popUpToInclusive="true" />
+    <fragment
+        android:id="@+id/filterFragment"
+        android:name="com.haytham.coder.graduationproject.ui.fragments.FilterFragment"
+        android:label="FilterFragment"
+        tools:layout="@layout/fragment_filter" />
+    <action
+        android:id="@+id/action_global_filterFragment"
+        app:destination="@id/filterFragment"
+        app:popUpTo="@id/filterFragment"
+        app:popUpToInclusive="true" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.haytham.coder.graduationproject.ui.fragments.ProfileFragment"
+        android:label="ProfileFragment"
+        tools:layout="@layout/fragment_profile" />
+    <action
+        android:id="@+id/action_global_profileFragment"
+        app:destination="@id/profileFragment" />
 </navigation>
