@@ -4,13 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+            <variable
+                name="viewModel"
+                type="com.haytham.coder.graduationproject.viewModel.SignInViewModel" />
 
     </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true">
 
     <androidx.constraintlayout.motion.widget.MotionLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:clipChildren="false"
         android:clipToPadding="false"
         android:paddingLeft="@dimen/activity_horizontal_margin"
@@ -77,7 +85,9 @@
             style="@style/login_edit_text_style"
             android:drawableStart="@drawable/ic_email"
             android:hint="@string/prompt_email"
+            android:text="@={viewModel.email}"
             android:inputType="textEmailAddress"
+            setErrorMsg="@{viewModel.emailError}"
             android:selectAllOnFocus="true"
             app:layout_constraintBottom_toTopOf="@+id/password"
             app:layout_constraintEnd_toEndOf="parent"
@@ -91,6 +101,8 @@
             android:layout_marginTop="12dp"
             android:drawableStart="@drawable/ic_password"
             android:hint="@string/prompt_password"
+            android:text="@={viewModel.password}"
+            setErrorMsg="@{viewModel.passwordError}"
             android:inputType="textPassword"
             app:layout_constraintBottom_toTopOf="@id/forgotPasswordText"
             app:layout_constraintEnd_toEndOf="parent"
@@ -118,6 +130,7 @@
             android:layout_marginTop="32dp"
             android:layout_marginBottom="64dp"
             android:text="@string/action_sign_in_short"
+            android:onClick="@{()->viewModel.login()}"
             app:layout_constraintBottom_toTopOf="@id/signUpText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
@@ -163,4 +176,6 @@
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.2" />
     </androidx.constraintlayout.motion.widget.MotionLayout>
+
+    </ScrollView>
 </layout>

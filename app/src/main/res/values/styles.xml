@@ -20,6 +20,7 @@
         <item name="android:background">@drawable/bg_login_edit_text</item>
         <item name="android:elevation">@dimen/login_edit_text_elevation</item>
         <item name="fontFamily">@font/merriweather_regular</item>
+        <item name="android:paddingEnd">@dimen/login_edit_text_error_padding</item>
         <item name="android:outlineSpotShadowColor" tools:targetApi="p">@color/colorPrimaryDark</item>
         <item name="android:outlineAmbientShadowColor" tools:targetApi="p">@color/colorPrimaryDark</item>
     </style>

@@ -6,6 +6,7 @@ import android.widget.TextView
 import androidx.annotation.ColorRes
 import androidx.core.app.ActivityCompat
 import androidx.databinding.BindingAdapter
+import com.google.android.material.textfield.TextInputEditText
 
 @BindingAdapter("startColor", "endColor", requireAll = true)
 fun TextView.setGradient(@ColorRes startColor: Int,
@@ -25,4 +26,9 @@ fun TextView.setGradient(@ColorRes startColor: Int,
         Shader.TileMode.CLAMP
     )
     paint.shader = textShader
+}
+
+@BindingAdapter("setErrorMsg")
+fun TextInputEditText.setErrorMsg(errorMsg: String?){
+    error= errorMsg
 }

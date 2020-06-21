@@ -8,6 +8,7 @@
     <dimen name="loginDrawablePadding">24dp</dimen>
     <dimen name="login_edit_text_elevation">6dp</dimen>
     <dimen name="login_edit_text_size">16sp</dimen>
+    <dimen name="login_edit_text_error_padding">18dp</dimen>
     <dimen name="card_corner_radius">2dp</dimen>
     <dimen name="student_image_size">90dp</dimen>
     <dimen name="student_card_padding_h">12dp</dimen>
