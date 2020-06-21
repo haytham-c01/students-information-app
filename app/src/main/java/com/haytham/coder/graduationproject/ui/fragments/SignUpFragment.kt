@@ -1,17 +1,22 @@
 package com.haytham.coder.graduationproject.ui.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.transition.TransitionInflater
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.haytham.coder.graduationproject.R
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import com.haytham.coder.graduationproject.databinding.FragmentSignInBinding
+import com.haytham.coder.graduationproject.databinding.FragmentSignUpBinding
 
 
 class SignUpFragment : Fragment() {
+    private lateinit var dataBinding: FragmentSignUpBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        sharedElementEnterTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.move)
     }
 
     override fun onCreateView(
@@ -19,7 +24,11 @@ class SignUpFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_sign_up, container, false)
-    }
+        dataBinding = FragmentSignUpBinding.inflate(inflater)
 
+        dataBinding.backButton.setOnClickListener {
+            findNavController().popBackStack()
+        }
+        return dataBinding.root
+    }
 }

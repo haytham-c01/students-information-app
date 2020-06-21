@@ -6,8 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.haytham.coder.graduationproject.R
-import com.haytham.coder.graduationproject.ui.SpacesItemDecoration
-import com.haytham.coder.graduationproject.ui.StudentsQuickAdapter
+import com.haytham.coder.graduationproject.ui.customViews.SpacesItemDecoration
+import com.haytham.coder.graduationproject.ui.adapters.StudentsQuickAdapter
 import com.haytham.coder.graduationproject.databinding.FragmentHomeBinding
 import com.haytham.coder.graduationproject.ui.MainActivity
 
@@ -31,7 +31,9 @@ class HomeFragment : Fragment() {
         val itemSpacing= resources.getDimension(R.dimen.students_list_half_spacing).toInt()
         dataBinding.studentsRecycler.apply {
             addItemDecoration(
-                SpacesItemDecoration(itemSpacing)
+                SpacesItemDecoration(
+                    itemSpacing
+                )
             )
             adapter= StudentsQuickAdapter()
                 .apply {

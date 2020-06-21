@@ -1,4 +1,4 @@
-package com.haytham.coder.graduationproject.ui
+package com.haytham.coder.graduationproject.ui.customViews
 
 import android.content.Context
 import android.util.AttributeSet

@@ -54,4 +54,8 @@
     <string name="name">Name</string>
     <string name="morning">Morning</string>
     <string name="evening">Evening</string>
+    <string name="transition_app_title">appTitleTransition</string>
+    <string name="transition_email_field">emailFieldTransition</string>
+    <string name="transition_password">passwordTransition</string>
+    <string name="transition_auth_btn">authBtnTransition</string>
 </resources>

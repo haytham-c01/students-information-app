@@ -7,7 +7,7 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.constraintlayout.motion.widget.MotionLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -16,7 +16,8 @@
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingBottom="@dimen/activity_vertical_margin">
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        app:layoutDescription="@xml/fragment_sign_in_xml_container_scene">
 
 
         <androidx.constraintlayout.widget.Guideline
@@ -27,15 +28,18 @@
             app:layout_constraintGuide_percent="0.8" />
 
         <com.google.android.material.textview.MaterialTextView
+            android:transitionName="@string/transition_app_title"
             android:id="@+id/appTitleText"
+            style="@style/authenticationTitleStyle"
+            endColor="@{@color/colorBlue}"
+            startColor="@{@color/colorDarkBlue}"
             android:text="@string/welcome_msg"
             app:layout_constraintBottom_toTopOf="@id/appDescriptionText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_chainStyle="spread_inside"
-            style="@style/authenticationTitleStyle" />
+            app:layout_constraintVertical_chainStyle="spread_inside" />
 
 
         <com.google.android.material.textview.MaterialTextView
@@ -43,7 +47,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:fontFamily="@font/merriweather_regular"
             android:text="@string/login_app_desc"
             android:textSize="16sp"
             app:layout_constraintBottom_toTopOf="@+id/logo"
@@ -54,6 +57,7 @@
             app:layout_constraintVertical_bias="1.0" />
 
         <ImageView
+            android:transitionName="@string/transition_logo"
             android:id="@+id/logo"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -68,10 +72,9 @@
 
 
         <com.google.android.material.textfield.TextInputEditText
+            android:transitionName="@string/transition_email_field"
             android:id="@+id/email"
             style="@style/login_edit_text_style"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:drawableStart="@drawable/ic_email"
             android:hint="@string/prompt_email"
             android:inputType="textEmailAddress"
@@ -82,10 +85,9 @@
             app:layout_constraintTop_toBottomOf="@+id/logo" />
 
         <com.google.android.material.textfield.TextInputEditText
+            android:transitionName="@string/transition_password"
             android:id="@+id/password"
             style="@style/login_edit_text_style"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:drawableStart="@drawable/ic_password"
             android:hint="@string/prompt_password"
@@ -104,12 +106,15 @@
             android:fontFamily="@font/merriweather_regular"
             android:text="@string/action_forgot_password"
             android:textSize="12sp"
+            android:visibility="invisible"
             app:layout_constraintBottom_toTopOf="@+id/loginBtn"
             app:layout_constraintEnd_toEndOf="@+id/password"
             app:layout_constraintTop_toBottomOf="@+id/password" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:transitionName="@string/transition_auth_btn"
             android:id="@+id/loginBtn"
+            style="@style/authentication_btn_style"
             android:layout_marginTop="32dp"
             android:layout_marginBottom="64dp"
             android:text="@string/action_sign_in_short"
@@ -118,8 +123,7 @@
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/forgotPasswordText"
-            app:layout_constraintVertical_bias="0.2"
-            style="@style/authentication_btn_style" />
+            app:layout_constraintVertical_bias="0.2" />
 
 
         <com.google.android.material.textview.MaterialTextView
@@ -151,21 +155,6 @@
             app:layout_constraintStart_toEndOf="@+id/noAccountText"
             app:layout_constraintTop_toBottomOf="@id/loginBtn" />
 
-        <ProgressBar
-            android:id="@+id/loading"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="64dp"
-            android:layout_marginEnd="32dp"
-            android:layout_marginBottom="64dp"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/password"
-            app:layout_constraintStart_toStartOf="@+id/password"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.3" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline"
@@ -173,5 +162,5 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.2" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.motion.widget.MotionLayout>
 </layout>
