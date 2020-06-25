@@ -1,4 +1,4 @@
-package com.haytham.coder.graduationproject.ui.fragments
+package com.haytham.coder.graduationproject.presentation.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,10 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.haytham.coder.graduationproject.R
-import com.haytham.coder.graduationproject.ui.customViews.SpacesItemDecoration
-import com.haytham.coder.graduationproject.ui.adapters.StudentsQuickAdapter
+import com.haytham.coder.graduationproject.presentation.customViews.SpacesItemDecoration
+import com.haytham.coder.graduationproject.presentation.adapters.StudentsQuickAdapter
 import com.haytham.coder.graduationproject.databinding.FragmentHomeBinding
-import com.haytham.coder.graduationproject.ui.MainActivity
+import com.haytham.coder.graduationproject.presentation.MainActivity
 
 
 class HomeFragment : Fragment() {

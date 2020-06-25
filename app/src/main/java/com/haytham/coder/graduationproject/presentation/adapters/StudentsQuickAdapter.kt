@@ -1,4 +1,4 @@
-package com.haytham.coder.graduationproject.ui.adapters
+package com.haytham.coder.graduationproject.presentation.adapters
 
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController

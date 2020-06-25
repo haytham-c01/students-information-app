@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/signInFragment"
-        android:name="com.haytham.coder.graduationproject.ui.fragments.SignInFragment"
+        android:name="com.haytham.coder.graduationproject.presentation.fragments.SignInFragment"
         android:label="SignInFragment"
         tools:layout="@layout/fragment_sign_in">
         <action
@@ -20,17 +20,17 @@
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
-        android:name="com.haytham.coder.graduationproject.ui.fragments.SignUpFragment"
+        android:name="com.haytham.coder.graduationproject.presentation.fragments.SignUpFragment"
         android:label="SignUpFragment"
         tools:layout="@layout/fragment_sign_up" />
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.haytham.coder.graduationproject.ui.fragments.HomeFragment"
+        android:name="com.haytham.coder.graduationproject.presentation.fragments.HomeFragment"
         android:label="HomeFragment"
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/searchFragment"
-        android:name="com.haytham.coder.graduationproject.ui.fragments.SearchFragment"
+        android:name="com.haytham.coder.graduationproject.presentation.fragments.SearchFragment"
         android:label="SearchFragment"
         tools:layout="@layout/fragment_search" />
     <action
@@ -45,7 +45,7 @@
         app:popUpToInclusive="true" />
     <fragment
         android:id="@+id/filterFragment"
-        android:name="com.haytham.coder.graduationproject.ui.fragments.FilterFragment"
+        android:name="com.haytham.coder.graduationproject.presentation.fragments.FilterFragment"
         android:label="FilterFragment"
         tools:layout="@layout/fragment_filter" />
     <action
@@ -55,7 +55,7 @@
         app:popUpToInclusive="true" />
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.haytham.coder.graduationproject.ui.fragments.ProfileFragment"
+        android:name="com.haytham.coder.graduationproject.presentation.fragments.ProfileFragment"
         android:label="ProfileFragment"
         tools:layout="@layout/fragment_profile" />
     <action

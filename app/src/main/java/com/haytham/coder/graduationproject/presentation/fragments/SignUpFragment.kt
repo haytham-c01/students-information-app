@@ -1,4 +1,4 @@
-package com.haytham.coder.graduationproject.ui.fragments
+package com.haytham.coder.graduationproject.presentation.fragments
 
 import android.os.Bundle
 import android.transition.TransitionInflater

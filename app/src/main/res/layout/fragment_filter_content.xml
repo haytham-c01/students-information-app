@@ -127,7 +127,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/divider1" />
 
-    <com.haytham.coder.graduationproject.ui.customViews.ToggleButtonGroupTableLayout
+    <com.haytham.coder.graduationproject.presentation.customViews.ToggleButtonGroupTableLayout
         android:id="@+id/degreeRadioGroup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -193,7 +193,7 @@
 
 
 
-    </com.haytham.coder.graduationproject.ui.customViews.ToggleButtonGroupTableLayout>
+    </com.haytham.coder.graduationproject.presentation.customViews.ToggleButtonGroupTableLayout>
 
     <View
         android:id="@+id/divider2"

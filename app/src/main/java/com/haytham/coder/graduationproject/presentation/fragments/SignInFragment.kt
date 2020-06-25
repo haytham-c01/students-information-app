@@ -1,4 +1,4 @@
-package com.haytham.coder.graduationproject.ui.fragments
+package com.haytham.coder.graduationproject.presentation.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,15 +6,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.observe
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.haytham.coder.graduationproject.R
 import com.haytham.coder.graduationproject.databinding.FragmentSignInBinding
+import com.haytham.coder.graduationproject.domain.viewModel.SignInViewModel
 import com.haytham.coder.graduationproject.utils.afterLayoutDrawn
-import com.haytham.coder.graduationproject.viewModel.SignInViewModel
+import com.haytham.coder.graduationproject.utils.showSnackBar
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class SignInFragment : Fragment() {
     private lateinit var dataBinding: FragmentSignInBinding
     private val args: SignInFragmentArgs by navArgs()
@@ -27,18 +30,11 @@ class SignInFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+        if(!firstRun) postponeEnterTransition()
+
         dataBinding = FragmentSignInBinding.inflate(inflater).apply {
-            postponeEnterTransition()
             viewModel = this@SignInFragment.viewModel
             lifecycleOwner = this@SignInFragment
-
-//            loginBtn.setOnClickListener {
-//                val action= SignInFragmentDirections.actionGlobalHomeFragment()
-//                findNavController().apply {
-//                    popBackStack(R.id.nav_graph, true)
-//                    navigate(action)
-//                }
-//            }
 
             signUpText.setOnClickListener {
                 val extras = FragmentNavigatorExtras(
@@ -53,14 +49,48 @@ class SignInFragment : Fragment() {
                     SignInFragmentDirections.actionSignInFragmentToSignUpFragment()
                 findNavController().navigate(action, extras)
             }
+
         }
 
-        handleTransitionAnimation()
+        setupViewModel()
         return dataBinding.root
     }
 
+    private fun setupViewModel() {
+        viewModel.apply {
+            loggedInEvent.observe(viewLifecycleOwner) {
+                it.getContentIfNotHandled()?.let {
+                    navigateToHomeScreen()
+                }
+            }
+
+            loginErrorEvent.observe(viewLifecycleOwner) {
+                it.getContentIfNotHandled()?.let {
+                    showLoginError(it)
+                }
+            }
+        }
+    }
+
+    private fun showLoginError(it: String) {
+        dataBinding.container.showSnackBar(it)
+    }
+
+    private fun navigateToHomeScreen() {
+        val action = SignInFragmentDirections.actionGlobalHomeFragment()
+        findNavController().apply {
+            popBackStack(R.id.nav_graph, true)
+            navigate(action)
+        }
+    }
+
+    override fun onStart() {
+        handleTransitionAnimation()
+        super.onStart()
+    }
+
     private fun handleTransitionAnimation() {
-        if (!firstRun || !args.showAnimation) setZeroTransitionTime()
+        if (!firstRun || !args.showAnimation) { setZeroTransitionTime() }
 
         dataBinding.container.afterLayoutDrawn {
             startTransitionAnimation()

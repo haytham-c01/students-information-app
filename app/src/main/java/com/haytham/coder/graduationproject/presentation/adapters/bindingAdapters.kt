@@ -1,10 +1,9 @@
-package com.haytham.coder.graduationproject.ui.adapters
+package com.haytham.coder.graduationproject.presentation.adapters
 
 import android.graphics.LinearGradient
 import android.graphics.Shader
 import android.widget.TextView
 import androidx.annotation.ColorRes
-import androidx.core.app.ActivityCompat
 import androidx.databinding.BindingAdapter
 import com.google.android.material.textfield.TextInputEditText
 

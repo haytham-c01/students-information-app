@@ -6,7 +6,7 @@
         android:id="@+id/loginAppearanceTransition"
         motion:constraintSetEnd="@+id/end"
         motion:constraintSetStart="@id/start"
-        motion:duration="400"
+        motion:duration="500"
         motion:motionInterpolator="easeOut">
        <KeyFrameSet>
        </KeyFrameSet>

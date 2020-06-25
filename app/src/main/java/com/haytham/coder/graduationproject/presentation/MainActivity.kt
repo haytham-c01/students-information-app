@@ -1,4 +1,4 @@
-package com.haytham.coder.graduationproject.ui
+package com.haytham.coder.graduationproject.presentation
 
 import android.os.Bundle
 import android.transition.TransitionManager
@@ -6,15 +6,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
-import androidx.navigation.get
 import com.google.android.material.tabs.TabLayout
 import com.haytham.coder.graduationproject.R
 import com.haytham.coder.graduationproject.databinding.ActivityMainBinding
 import com.haytham.coder.graduationproject.databinding.MenuItemBottomTabsBinding
-import com.haytham.coder.graduationproject.ui.fragments.HomeFragmentDirections
-import com.haytham.coder.graduationproject.ui.fragments.SearchFragment
-import com.haytham.coder.graduationproject.ui.fragments.SearchFragmentDirections
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity(), TabLayout.OnTabSelectedListener {
     private lateinit var dataBinding: ActivityMainBinding
 

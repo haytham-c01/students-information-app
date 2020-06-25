@@ -6,7 +6,7 @@
     <data>
             <variable
                 name="viewModel"
-                type="com.haytham.coder.graduationproject.viewModel.SignInViewModel" />
+                type="com.haytham.coder.graduationproject.domain.viewModel.SignInViewModel" />
 
     </data>
 

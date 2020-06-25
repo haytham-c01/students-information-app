@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "808596897196",
+    "firebase_url": "https://graduation-project-1ee83.firebaseio.com",
+    "project_id": "graduation-project-1ee83",
+    "storage_bucket": "graduation-project-1ee83.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:808596897196:android:f82855b035f1c28cf6ce09",
+        "android_client_info": {
+          "package_name": "com.haytham.coder.graduationproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "808596897196-hqq5vpbf7hqhcf3ob0q9k875af576iru.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJfvXuZLjmYtrUJtOeS0lYJZHNEF0nZIw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "808596897196-hqq5vpbf7hqhcf3ob0q9k875af576iru.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
