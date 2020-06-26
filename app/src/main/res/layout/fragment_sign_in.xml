@@ -130,7 +130,7 @@
             android:layout_marginTop="32dp"
             android:layout_marginBottom="64dp"
             android:text="@string/action_sign_in_short"
-            android:onClick="@{()->viewModel.login()}"
+            android:onClick="@{()->viewModel.authenticate()}"
             app:layout_constraintBottom_toTopOf="@id/signUpText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"

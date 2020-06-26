@@ -1,12 +1,10 @@
-package com.haytham.coder.graduationproject.presentation.fragments
+package com.haytham.coder.graduationproject.presentation.fragments.authentication
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.observe
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -14,15 +12,14 @@ import com.haytham.coder.graduationproject.R
 import com.haytham.coder.graduationproject.databinding.FragmentSignInBinding
 import com.haytham.coder.graduationproject.domain.viewModel.SignInViewModel
 import com.haytham.coder.graduationproject.utils.afterLayoutDrawn
-import com.haytham.coder.graduationproject.utils.showSnackBar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class SignInFragment : Fragment() {
+class SignInFragment : BaseAuthFragment() {
     private lateinit var dataBinding: FragmentSignInBinding
     private val args: SignInFragmentArgs by navArgs()
     private var firstRun: Boolean = true
-    private val viewModel: SignInViewModel by viewModels()
+    override val viewModel: SignInViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -52,36 +49,8 @@ class SignInFragment : Fragment() {
 
         }
 
-        setupViewModel()
+        super.onCreateView(inflater, container, savedInstanceState)
         return dataBinding.root
-    }
-
-    private fun setupViewModel() {
-        viewModel.apply {
-            loggedInEvent.observe(viewLifecycleOwner) {
-                it.getContentIfNotHandled()?.let {
-                    navigateToHomeScreen()
-                }
-            }
-
-            loginErrorEvent.observe(viewLifecycleOwner) {
-                it.getContentIfNotHandled()?.let {
-                    showLoginError(it)
-                }
-            }
-        }
-    }
-
-    private fun showLoginError(it: String) {
-        dataBinding.container.showSnackBar(it)
-    }
-
-    private fun navigateToHomeScreen() {
-        val action = SignInFragmentDirections.actionGlobalHomeFragment()
-        findNavController().apply {
-            popBackStack(R.id.nav_graph, true)
-            navigate(action)
-        }
     }
 
     override fun onStart() {

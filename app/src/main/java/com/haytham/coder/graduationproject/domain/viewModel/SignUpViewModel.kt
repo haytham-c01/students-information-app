@@ -2,27 +2,45 @@ package com.haytham.coder.graduationproject.domain.viewModel
 
 import android.app.Application
 import androidx.hilt.lifecycle.ViewModelInject
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.haytham.coder.graduationproject.R
-import com.haytham.coder.graduationproject.domain.usecase.contract.LoginUseCase
+import com.haytham.coder.graduationproject.domain.usecase.contract.SignUpUseCase
 import com.haytham.coder.graduationproject.utils.*
 import kotlinx.coroutines.launch
 
 
-class SignInViewModel @ViewModelInject constructor(
+class SignUpViewModel @ViewModelInject constructor(
     application: Application,
-    private val loginUseCase: LoginUseCase
+    private val signUpUseCase: SignUpUseCase
 ) : BaseAuthViewModel(application){
 
     companion object{
         private const val TAG= "SignInViewModel"
     }
 
+    var username:String= ""
+    val usernameError: MutableLiveData<String> = MutableLiveData()
+
+    var repeatPass:String= ""
+    val repeatPassError: MutableLiveData<String> = MutableLiveData()
+
     override fun isDataValid(): Boolean {
+
+        username.getSignUpUsernameErrorMsg()?.let {
+            usernameError.value= con.getString(it)
+            return false
+        }
+
         if(!super.isDataValid()) return false
 
-        password.getLoginPassErrorMsg()?.let {
-            passwordError.value = con.getString(it)
+        password.getSignUpPassErrorMsg()?.let {
+            passwordError.value= con.getString(it)
+            return false
+        }
+
+        repeatPass.getSignUpRepeatPassErrorMsg(password)?.let {
+            repeatPassError.value= con.getString(it)
             return false
         }
 
@@ -32,7 +50,7 @@ class SignInViewModel @ViewModelInject constructor(
     override fun authenticate(){
         if(isDataValid()){
             viewModelScope.launch {
-                when(val authRes= loginUseCase(email, password)){
+                when(val authRes= signUpUseCase(username, email, password)){
                   is Authenticated -> _authenticatedEvent.value= Event(true)
                   is AuthError -> _authErrorEvent.value= Event(authRes.errorMessage)
                 }

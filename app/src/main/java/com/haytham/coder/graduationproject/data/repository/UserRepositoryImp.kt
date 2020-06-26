@@ -18,6 +18,14 @@ class UserRepositoryImp @Inject constructor(
         return  userService.loginUser(email, password)
     }
 
+    override suspend fun signUpUser(
+        username: String,
+        email: String,
+        password: String
+    ): AuthResponse {
+        return userService.signUpUser(username, email, password)
+    }
+
     override suspend fun logout() {
         userService.logout()
     }

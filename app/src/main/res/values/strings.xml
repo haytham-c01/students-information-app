@@ -53,6 +53,12 @@
     <string name="transition_email_field">emailFieldTransition</string>
     <string name="transition_password">passwordTransition</string>
     <string name="transition_auth_btn">authBtnTransition</string>
+    <string name="invalid_username">invalid username!</string>
     <string name="invalid_email">invalid email!</string>
     <string name="invalid_password">invalid password!</string>
+    <string name="invalid_repeat_password">passwords are not the same!</string>
+    <string name="field_required">this field is required!</string>
+    <string name="min_username_error">username must be at least 2 characters!</string>
+    <string name="min_password_error">password must be at least 6 characters!</string>
+    <string name="different_repeat_passe_error">passwords are not the same!</string>
 </resources>

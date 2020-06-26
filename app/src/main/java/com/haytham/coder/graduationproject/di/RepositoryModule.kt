@@ -13,14 +13,8 @@ import dagger.hilt.android.components.ActivityRetainedComponent
 
 @Module
 @InstallIn(ActivityRetainedComponent::class)
-interface LoginModule {
-
-    @Binds
-    fun bindLoginUseCase(loginUseCaseImp: LoginUseCaseImp): LoginUseCase
-
+interface RepositoryModule {
     @Binds
     fun bindUserRepository(userRepositoryImp: UserRepositoryImp): UserRepository
 
-    @Binds
-    fun bindUserService(userServiceImp: UserServiceImp): UserService
 }
