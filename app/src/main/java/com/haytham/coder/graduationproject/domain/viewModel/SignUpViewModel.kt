@@ -4,15 +4,14 @@ import android.app.Application
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.haytham.coder.graduationproject.R
-import com.haytham.coder.graduationproject.domain.usecase.contract.SignUpUseCase
+import com.haytham.coder.graduationproject.domain.usecase.contract.ISignUpUseCase
 import com.haytham.coder.graduationproject.utils.*
 import kotlinx.coroutines.launch
 
 
 class SignUpViewModel @ViewModelInject constructor(
     application: Application,
-    private val signUpUseCase: SignUpUseCase
+    private val signUpUseCase: ISignUpUseCase
 ) : BaseAuthViewModel(application){
 
     companion object{
@@ -50,10 +49,12 @@ class SignUpViewModel @ViewModelInject constructor(
     override fun authenticate(){
         if(isDataValid()){
             viewModelScope.launch {
+                _isLoading.postValue(true)
                 when(val authRes= signUpUseCase(username, email, password)){
                   is Authenticated -> _authenticatedEvent.value= Event(true)
                   is AuthError -> _authErrorEvent.value= Event(authRes.errorMessage)
                 }
+                _isLoading.postValue(false)
             }
         }
     }

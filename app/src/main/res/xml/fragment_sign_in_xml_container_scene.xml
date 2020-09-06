@@ -68,7 +68,7 @@
             motion:layout_constraintTop_toBottomOf="@+id/password"
             android:layout_marginTop="8dp" />
         <Constraint
-            android:id="@+id/loginBtn"
+            android:id="@+id/loginBtnContainer"
             android:translationY="600dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

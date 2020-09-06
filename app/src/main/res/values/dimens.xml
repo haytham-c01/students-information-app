@@ -38,4 +38,5 @@
     <dimen name="add_student_page_section_spacing">32dp</dimen>
     <dimen name="add_student_page_item_spacing">18dp</dimen>
     <dimen name="add_student_btn_horizontal_margin">58dp</dimen>
+    <dimen name="bottom_nav_margin">56dp</dimen>
 </resources>

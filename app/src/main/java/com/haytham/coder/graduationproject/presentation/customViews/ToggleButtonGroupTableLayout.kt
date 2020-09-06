@@ -14,6 +14,7 @@ import android.widget.TableRow
  */
 class ToggleButtonGroupTableLayout : TableLayout, View.OnClickListener {
     private var activeRadioButton: RadioButton? = null
+    var tableOnClickListener: (()->Unit)? = null
 
     /**
      * @param context
@@ -38,6 +39,7 @@ class ToggleButtonGroupTableLayout : TableLayout, View.OnClickListener {
         }
         rb.isChecked = true
         activeRadioButton = rb
+        tableOnClickListener?.invoke()
     }
 
     /* (non-Javadoc)

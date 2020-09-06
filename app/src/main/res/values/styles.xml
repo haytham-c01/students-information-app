@@ -10,10 +10,16 @@
         <item name="android:fontFamily">@font/merriweather_regular</item>
     </style>
 
+    <style name="SplashScreenTheme" parent="@style/AppTheme">
+        <item name="android:windowBackground">@drawable/splash_screen</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
     <style name="login_edit_text_style">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:paddingVertical" tools:targetApi="o">@dimen/edit_text_vertical_padding</item>
+        <item name="android:paddingVertical" tools:targetApi="o">@dimen/edit_text_vertical_padding
+        </item>
         <item name="android:paddingStart">@dimen/edit_text_icon_padding</item>
         <item name="android:textSize">@dimen/login_edit_text_size</item>
         <item name="android:drawablePadding">@dimen/loginDrawablePadding</item>
@@ -21,8 +27,10 @@
         <item name="android:elevation">@dimen/login_edit_text_elevation</item>
         <item name="fontFamily">@font/merriweather_regular</item>
         <item name="android:paddingEnd">@dimen/login_edit_text_error_padding</item>
-        <item name="android:outlineSpotShadowColor" tools:targetApi="p">@color/colorPrimaryDark</item>
-        <item name="android:outlineAmbientShadowColor" tools:targetApi="p">@color/colorPrimaryDark</item>
+        <item name="android:outlineSpotShadowColor" tools:targetApi="p">@color/colorPrimaryDark
+        </item>
+        <item name="android:outlineAmbientShadowColor" tools:targetApi="p">@color/colorPrimaryDark
+        </item>
     </style>
 
     <style name="authentication_btn_style">
@@ -34,9 +42,11 @@
         <item name="android:drawablePadding">8dp</item>
         <item name="android:elevation">12dp</item>
         <item name="android:enabled">true</item>
-        <item name="android:outlineAmbientShadowColor" tools:targetApi="p">@color/colorPrimaryDark</item>
+        <item name="android:outlineAmbientShadowColor" tools:targetApi="p">@color/colorPrimaryDark
+        </item>
         <item name="android:outlineProvider">background</item>
-        <item name="android:outlineSpotShadowColor" tools:targetApi="p">@color/colorPrimaryDark</item>
+        <item name="android:outlineSpotShadowColor" tools:targetApi="p">@color/colorPrimaryDark
+        </item>
         <item name="android:paddingStart">28dp</item>
         <item name="android:paddingEnd">20dp</item>
         <item name="android:textStyle">bold</item>

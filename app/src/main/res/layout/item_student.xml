@@ -4,7 +4,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
+        <variable
+            name="studentModel"
+            type="com.haytham.coder.graduationproject.domain.model.StudentModel" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -19,13 +21,16 @@
             android:paddingHorizontal="@dimen/student_card_padding_h"
             android:paddingVertical="@dimen/student_card_padding_v">
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/imageView"
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/studentImage"
                 android:layout_width="@dimen/student_image_size"
                 android:layout_height="@dimen/student_image_size"
+                app:roundAsCircle="true"
+                android:imageUrl="@{studentModel.studentImageUrl}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:src="@drawable/profile_image" />
+                app:placeholderImageScaleType="centerCrop"
+                app:placeholderImage="@drawable/profile_image" />
 
             <TextView
                 android:id="@+id/studentName"
@@ -40,11 +45,12 @@
                 app:layout_constraintBottom_toTopOf="@id/degreeAndDepartment"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/imageView"
-                app:layout_constraintTop_toBottomOf="@+id/imageView"
+                app:layout_constraintStart_toStartOf="@+id/studentImage"
+                app:layout_constraintTop_toBottomOf="@+id/studentImage"
                 app:layout_constraintVertical_bias="0.0"
                 app:layout_constraintVertical_chainStyle="packed"
-                android:text="Sara Salm Mohammed" />
+                android:text="@{studentModel.studentName}"
+                tools:text="Sara Salm Mohammed" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -53,11 +59,12 @@
                 android:lineSpacingExtra="6dp"
                 android:textAlignment="center"
                 android:textSize="@dimen/student_card_text_size"
-                app:layout_constraintBottom_toBottomOf="@+id/imageView"
+                app:layout_constraintBottom_toBottomOf="@+id/studentImage"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/imageView"
-                app:layout_constraintTop_toTopOf="@+id/imageView"
-                android:text="Student\n At level-4" />
+                app:layout_constraintStart_toEndOf="@+id/studentImage"
+                app:layout_constraintTop_toTopOf="@+id/studentImage"
+                android:text='@{studentModel.schoolInfo.graduate? ("Graduate\n" + (studentModel.schoolInfo.graduationYear-1) + "-"  + studentModel.schoolInfo.graduationYear) :"Student\n at level- " + studentModel.schoolInfo.stage }'
+                tools:text="Student\n At level-4" />
 
 
             <TextView
@@ -74,7 +81,8 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/studentName"
                 app:layout_constraintTop_toBottomOf="@+id/studentName"
-                android:text="Bachelor of Computer Science" />
+                android:text='@{studentModel.schoolInfo.degree + " of " + studentModel.schoolInfo.branch.departmentName}'
+                tools:text="Bachelor of Computer Science" />
 
             <TextView
                 android:id="@+id/Branch"
@@ -90,10 +98,13 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/degreeAndDepartment"
                 app:layout_constraintTop_toBottomOf="@id/degreeAndDepartment"
-                android:text="Software Branch" />
+                android:text='@{studentModel.schoolInfo.branch.branchName + " Branch"}'
+
+                tools:text="Software Branch" />
 
             <ImageView
                 android:id="@+id/phoneIcon"
+                android:background="?attr/selectableItemBackgroundBorderless"
                 android:layout_width="@dimen/student_card_icon_size"
                 android:layout_height="@dimen/student_card_icon_size"
                 android:layout_marginTop="@dimen/student_card_icon_spacing"
@@ -104,6 +115,7 @@
 
             <ImageView
                 android:id="@+id/copyIcon"
+                android:background="?attr/selectableItemBackgroundBorderless"
                 android:layout_width="@dimen/student_card_icon_size"
                 android:layout_height="@dimen/student_card_icon_size"
                 android:layout_marginStart="@dimen/student_card_icon_spacing"
@@ -116,19 +128,20 @@
                 android:id="@+id/deleteIcon"
                 android:layout_width="@dimen/student_card_icon_size"
                 android:layout_height="@dimen/student_card_icon_size"
-                android:layout_marginEnd="@dimen/student_card_icon_spacing"
+                android:background="?attr/selectableItemBackgroundBorderless"
                 android:src="@drawable/ic_delete"
                 app:layout_constraintBottom_toBottomOf="@+id/editIcon"
-                app:layout_constraintEnd_toStartOf="@+id/editIcon"
-                app:layout_constraintTop_toTopOf="@+id/editIcon" />
+                app:layout_constraintEnd_toStartOf="@+id/editIcon" />
 
             <ImageView
                 android:id="@+id/editIcon"
+                android:background="?attr/selectableItemBackgroundBorderless"
                 android:layout_width="@dimen/student_card_icon_size"
                 android:layout_height="@dimen/student_card_icon_size"
                 android:src="@drawable/ic_edit"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
+                app:layout_constraintEnd_toEndOf="parent"
+                android:visibility="gone"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

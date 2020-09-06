@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="studentModel"
+            type="com.haytham.coder.graduationproject.domain.model.StudentModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
 
         <include
             android:layout_width="match_parent"
@@ -23,6 +24,7 @@
 
         <ImageView
             android:id="@+id/backArrow"
+            android:background="?attr/selectableItemBackgroundBorderless"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -30,43 +32,48 @@
             android:elevation="8dp"
             android:outlineProvider="none"
             android:src="@drawable/ic_arrow_left"
-            android:tint="@android:color/white"
+            app:tint="@android:color/white"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/profileImage"
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:transitionName="@string/transition_student_image"
+            android:id="@+id/studentImage"
             android:layout_width="@dimen/profile_image_size"
             android:layout_height="@dimen/profile_image_size"
             android:elevation="12dp"
             android:outlineProvider="none"
-            android:src="@drawable/profile_image"
-            app:layout_constraintBottom_toTopOf="@id/username"
+            android:imageUrl="@{studentModel.studentImageUrl}"
+            app:placeholderImage="@drawable/profile_image"
+            app:layout_constraintBottom_toTopOf="@id/studentName"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_chainStyle="packed" />
+            app:layout_constraintVertical_chainStyle="packed"
+            app:roundAsCircle="true"/>
 
         <TextView
-            android:id="@+id/username"
+            android:transitionName="@string/transition_student_name"
+            android:id="@+id/studentName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:elevation="8dp"
             android:textSize="18sp"
-            android:text="Sara Salm Mohammed"
+            android:text="@{studentModel.studentName}"
+            tools:text="Sara Salm Mohammed"
             android:textColor="@android:color/white"
             app:layout_constraintBottom_toTopOf="@+id/guideline3"
-            app:layout_constraintEnd_toEndOf="@+id/profileImage"
-            app:layout_constraintStart_toStartOf="@+id/profileImage"
-            app:layout_constraintTop_toBottomOf="@id/profileImage" />
+            app:layout_constraintEnd_toEndOf="@+id/studentImage"
+            app:layout_constraintStart_toStartOf="@+id/studentImage"
+            app:layout_constraintTop_toBottomOf="@id/studentImage" />
 
 
         <TextView
             android:id="@+id/ageTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/profile_content_margin"
+            android:layout_marginTop="32dp"
             android:text="@string/age"
             app:layout_constraintBottom_toTopOf="@+id/cityTitle"
             app:layout_constraintStart_toStartOf="@+id/guideline4"
@@ -151,7 +158,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/profile_item_spacing"
-            android:text="@string/city"
+            android:text="@string/degree"
             app:layout_constraintBottom_toTopOf="@+id/departmentTitle"
             app:layout_constraintStart_toStartOf="@+id/guideline4"
             app:layout_constraintTop_toBottomOf="@+id/stateTitle" />
@@ -161,7 +168,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/profile_item_spacing"
-            android:text="@string/phone"
+            android:text="@string/department"
             app:layout_constraintBottom_toTopOf="@+id/branchTitle"
             app:layout_constraintStart_toStartOf="@+id/guideline4"
             app:layout_constraintTop_toBottomOf="@+id/degreeTitle" />
@@ -171,7 +178,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/profile_item_spacing"
-            android:text="@string/email"
+            android:text="@string/branch"
             app:layout_constraintBottom_toTopOf="@+id/divider2"
             app:layout_constraintStart_toStartOf="@+id/guideline4"
             app:layout_constraintTop_toBottomOf="@+id/departmentTitle" />
@@ -196,7 +203,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:text="@string/stay_in_college"
+            android:text="@string/in_college_residence"
             app:layout_constraintBottom_toTopOf="@+id/studyTimeTitle"
             app:layout_constraintStart_toStartOf="@+id/guideline4"
             app:layout_constraintTop_toBottomOf="@+id/divider2" />
@@ -206,8 +213,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/profile_item_spacing"
-            android:layout_marginBottom="@dimen/profile_content_margin"
-            android:text="@string/study_time"
+            android:layout_marginBottom="32dp"
+            android:text="@string/evening_college"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline4"
             app:layout_constraintTop_toBottomOf="@+id/stayInCollegeTitle" />
@@ -224,7 +231,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@android:color/black"
-            android:text="20 years old"
+            android:text="@{studentModel.studentName}"
+            tools:text="20 years old"
             app:layout_constraintBottom_toBottomOf="@+id/ageTitle"
             app:layout_constraintStart_toStartOf="@+id/guideline5"
             app:layout_constraintTop_toTopOf="@+id/ageTitle"
@@ -236,7 +244,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@android:color/black"
-            android:text="Baghdad"
+            app:setCity="@{studentModel.contact.cityId}"
+            tools:text="Baghdad"
             app:layout_constraintBottom_toBottomOf="@+id/cityTitle"
             app:layout_constraintStart_toStartOf="@+id/guideline5"
             app:layout_constraintTop_toTopOf="@+id/cityTitle"
@@ -248,7 +257,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@android:color/black"
-            android:text="+96477162552361"
+            android:text="@{studentModel.contact.phone}"
+            tools:text="+96477162552361"
             app:layout_constraintBottom_toBottomOf="@+id/phoneTitle"
             app:layout_constraintStart_toStartOf="@+id/guideline5"
             app:layout_constraintTop_toTopOf="@+id/phoneTitle"
@@ -260,7 +270,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@android:color/black"
-            android:text="test@gmail.com"
+            android:text="@{studentModel.contact.email}"
+            tools:text="test@gmail.com"
             app:layout_constraintBottom_toBottomOf="@+id/emailTitle"
             app:layout_constraintStart_toStartOf="@+id/guideline5"
             app:layout_constraintTop_toTopOf="@+id/emailTitle"
@@ -272,7 +283,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@android:color/black"
-            android:text="Student at level-4"
+            android:text='@{studentModel.schoolInfo.graduate? ("Graduate " + (studentModel.schoolInfo.graduationYear-1) + "-"  + studentModel.schoolInfo.graduationYear) :"Student at level- " + studentModel.schoolInfo.stage}'
+            tools:text="Student at level-4"
             app:layout_constraintBottom_toBottomOf="@+id/stateTitle"
             app:layout_constraintStart_toStartOf="@+id/guideline5"
             app:layout_constraintTop_toTopOf="@+id/stateTitle"
@@ -283,7 +295,8 @@
             android:id="@+id/degree"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Bachelor"
+            android:text="@{studentModel.schoolInfo.degree}"
+            tools:text="Bachelor"
             android:textColor="@android:color/black"
             app:layout_constraintBottom_toBottomOf="@+id/degreeTitle"
             app:layout_constraintStart_toStartOf="@+id/guideline5"
@@ -295,7 +308,8 @@
             android:id="@+id/department"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Computer Science"
+            android:text="@{studentModel.schoolInfo.branch.departmentName}"
+            tools:text="Computer Science"
             android:textColor="@android:color/black"
             app:layout_constraintBottom_toBottomOf="@+id/departmentTitle"
             app:layout_constraintStart_toStartOf="@+id/guideline5"
@@ -307,7 +321,8 @@
             android:id="@+id/branch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Software"
+            android:text="@{studentModel.schoolInfo.branch.branchName}"
+            tools:text="Software"
             android:textColor="@android:color/black"
             app:layout_constraintBottom_toBottomOf="@+id/branchTitle"
             app:layout_constraintStart_toStartOf="@+id/guideline5"
@@ -320,7 +335,8 @@
             android:id="@+id/stayInCollege"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Yes"
+            android:text='@{studentModel.contact.inCollegeResidence? "Yes": "No"}'
+            tools:text="Yes"
             android:textColor="@android:color/black"
             app:layout_constraintBottom_toBottomOf="@+id/stayInCollegeTitle"
             app:layout_constraintStart_toStartOf="@+id/guideline5"
@@ -332,7 +348,8 @@
             android:id="@+id/studyTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Evening"
+            android:text='@{studentModel.schoolInfo.eveningCollege? "Yes":"No"}'
+            tools:text="Evening"
             android:textColor="@android:color/black"
             app:layout_constraintBottom_toBottomOf="@+id/studyTimeTitle"
             app:layout_constraintStart_toStartOf="@+id/guideline5"

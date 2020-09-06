@@ -36,11 +36,11 @@
     <string name="branch">Branch</string>
     <string name="residence">Residence</string>
     <string name="city">City</string>
-    <string name="stay_in_college">Stay in College?</string>
+    <string name="in_college_residence">In college residence?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="other">Other</string>
-    <string name="study_time">Study time</string>
+    <string name="evening_college">Evening college?</string>
     <string name="age">Age</string>
     <string name="phone">Phone</string>
     <string name="email">Email</string>
@@ -61,4 +61,29 @@
     <string name="min_username_error">username must be at least 2 characters!</string>
     <string name="min_password_error">password must be at least 6 characters!</string>
     <string name="different_repeat_passe_error">passwords are not the same!</string>
+    <string name="no_students_found">No students found</string>
+    <string name="transition_student_image">studentImageTransition</string>
+    <string name="transition_student_name">studentNameTransition</string>
+
+
+    <string-array name="cities">
+        <item>بغداد</item>
+        <item>دهوك</item>
+        <item>سليمانية</item>
+        <item>اربيل</item>
+        <item>نينوى</item>
+        <item>كركوك</item>
+        <item>صلاح الدين</item>
+        <item>ديالى</item>
+        <item>الانبار</item>
+        <item>واسط</item>
+        <item>بابل</item>
+        <item>كربلاء</item>
+        <item>القادسية</item>
+        <item>النجف</item>
+        <item>ميسان</item>
+        <item>ذي قار</item>
+        <item>المثنى</item>
+        <item>البصرة</item>
+    </string-array>
 </resources>

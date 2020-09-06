@@ -1,17 +1,7 @@
 package com.haytham.coder.graduationproject.di
 
-import com.haytham.coder.graduationproject.data.network.UserService
-import com.haytham.coder.graduationproject.data.network.UserServiceImp
-import com.haytham.coder.graduationproject.data.repository.UserRepositoryImp
-import com.haytham.coder.graduationproject.domain.repository.UserRepository
-import com.haytham.coder.graduationproject.domain.usecase.contract.GetUserUseCase
-import com.haytham.coder.graduationproject.domain.usecase.contract.LoginUseCase
-import com.haytham.coder.graduationproject.domain.usecase.contract.LogoutUseCase
-import com.haytham.coder.graduationproject.domain.usecase.contract.SignUpUseCase
-import com.haytham.coder.graduationproject.domain.usecase.implementation.GetUserUseCaseImp
-import com.haytham.coder.graduationproject.domain.usecase.implementation.LoginUseCaseImp
-import com.haytham.coder.graduationproject.domain.usecase.implementation.LogoutUseCaseImp
-import com.haytham.coder.graduationproject.domain.usecase.implementation.SignUpUseCaseImp
+import com.haytham.coder.graduationproject.domain.usecase.contract.*
+import com.haytham.coder.graduationproject.domain.usecase.implementation.*
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -22,14 +12,33 @@ import dagger.hilt.android.components.ActivityRetainedComponent
 interface UseCaseModule {
 
     @Binds
-    fun bindLoginUseCase(loginUseCaseImp: LoginUseCaseImp): LoginUseCase
+    fun bindLoginUseCase(loginUseCase: LoginUseCase): ILoginUseCase
 
     @Binds
-    fun bindSignUpCase(signUpUseCaseImp: SignUpUseCaseImp): SignUpUseCase
+    fun bindSignUpCase(signUpUseCase: SignUpUseCase): ISignUpUseCase
 
     @Binds
-    fun bindGetUserUseCase(getUserUseCaseImp: GetUserUseCaseImp): GetUserUseCase
+    fun bindGetUserUseCase(getUserUseCase: GetUserUseCase): IGetUserUseCase
 
     @Binds
-    fun bindLogoutUseCase(logoutUseCaseImp: LogoutUseCaseImp): LogoutUseCase
+    fun bindLogoutUseCase(logoutUseCase: LogoutUseCase): ILogoutUseCase
+
+    @Binds
+    fun bindGetBranchStudentsUseCase(getBranchStudentsUseCase: GetBranchStudentsUseCase): IGetBranchStudentsUseCase
+
+    @Binds
+    fun bindSearchStudentsUseCase(searchStudentUseCase: SearchStudentsUseCase): ISearchStudentsUseCase
+
+    @Binds
+    fun bindAddStudentUseCase(addStudentUseCase: AddStudentUseCase): IAddStudentUseCase
+
+    @Binds
+    fun bindGetBranchesUseCase(getBranchesUseCase: GetBranchesUseCase): IGetBranchesUseCase
+
+    @Binds
+    fun bindDeleteStudentUseCase(deleteStudentUseCase: DeleteStudentUseCase): IDeleteStudentUseCase
+
+    @Binds
+    fun bindSetFilterUseCase(updateFilterUseCase: UpdateFilterUseCase): IUpdateFilterUseCase
+
 }

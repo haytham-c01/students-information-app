@@ -9,6 +9,7 @@ import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import com.haytham.coder.graduationproject.R
 import com.haytham.coder.graduationproject.domain.viewModel.BaseAuthViewModel
+import com.haytham.coder.graduationproject.presentation.activity.MainActivity
 import com.haytham.coder.graduationproject.utils.showSnackBar
 
 abstract class BaseAuthFragment : Fragment() {
@@ -27,7 +28,8 @@ abstract class BaseAuthFragment : Fragment() {
     private fun setupViewModel() {
         viewModel.apply {
             authenticatedEvent.observe(viewLifecycleOwner) {
-                it.getContentIfNotHandled()?.let {
+                it.getContentIfNotHandled()?.let { canWrite ->
+                    if (canWrite) (activity as MainActivity).enableFab()
                     navigateToHomeScreen()
                 }
             }

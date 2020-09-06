@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
+        <variable
+            name="model"
+            type="com.haytham.coder.graduationproject.domain.viewModel.FilterStudentViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -25,16 +27,468 @@
                 <TextView
                     android:id="@+id/pageTitle"
                     style="@style/page_title_style"
-                    android:text="@string/filter_page_title"
                     android:layout_gravity="center"
-                    />
+                    android:text="@string/filter_page_title" />
 
             </com.google.android.material.appbar.MaterialToolbar>
 
         </com.google.android.material.appbar.AppBarLayout>
 
-        <include
-            layout="@layout/fragment_filter_content" />
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                xmlns:tools="http://schemas.android.com/tools"
+                android:id="@+id/constraintLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/bottom_nav_margin"
+                android:padding="@dimen/filter_page_padding">
+
+
+                <TextView
+                    android:id="@+id/stateSectionTitle"
+                    style="@style/filterSectionTitleStyle"
+                    android:text="@string/state"
+                    app:layout_anchor="@+id/constraintLayout"
+                    app:layout_anchorGravity="center"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <RadioGroup
+                    android:id="@+id/stateRadioGroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/filter_items_spacing"
+                    android:checkedButton="@id/anyStateRadioBtn"
+                    android:orientation="horizontal"
+                    app:layout_constraintTop_toBottomOf="@id/stateSectionTitle"
+                    tools:layout_editor_absoluteX="24dp">
+
+                    <com.google.android.material.radiobutton.MaterialRadioButton
+                        android:id="@+id/studentRadioBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="@dimen/radio_button_padding_end"
+                        android:text="@string/student"
+                        tools:ignore="RtlSymmetry" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+
+                    <com.google.android.material.radiobutton.MaterialRadioButton
+                        android:id="@+id/graduateRadioBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="@dimen/radio_button_padding_end"
+                        android:text="@string/Graduate"
+                        tools:ignore="RtlSymmetry" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+
+                    <com.google.android.material.radiobutton.MaterialRadioButton
+                        android:id="@+id/anyStateRadioBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="@dimen/radio_button_padding_end"
+                        android:text="@string/any"
+                        tools:ignore="RtlSymmetry" />
+
+                </RadioGroup>
+
+
+                <TextView
+                    android:id="@+id/levelText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/filter_items_spacing"
+                    android:text="@string/level"
+                    android:textSize="@dimen/spinner_title_text_size"
+                    app:layout_anchor="@+id/constraintLayout"
+                    app:layout_anchorGravity="center"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/stateRadioGroup" />
+
+                <Spinner
+                    android:id="@+id/stageSpinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:setList="@{model.stages}"
+                    android:layout_marginTop="@dimen/spinner_and_title_spacing"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/levelText" />
+
+
+                <TextView
+                    android:id="@+id/yearText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/year"
+                    android:textSize="@dimen/spinner_title_text_size"
+                    app:layout_anchor="@+id/constraintLayout"
+                    app:layout_anchorGravity="center"
+                    app:layout_constraintStart_toStartOf="@+id/yearSpinner"
+                    app:layout_constraintTop_toTopOf="@+id/levelText" />
+
+                <Spinner
+                    android:id="@+id/yearSpinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:setList="@{model.years}"
+                    android:layout_marginStart="@dimen/filter_items_spacing"
+                    app:layout_constraintStart_toEndOf="@+id/stageSpinner"
+                    app:layout_constraintTop_toTopOf="@+id/stageSpinner" />
+
+
+                <View
+                    android:id="@+id/divider1"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/filter_divider_margin_top"
+                    android:background="@color/dividerColor"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/stageSpinner" />
+
+                <TextView
+                    android:id="@+id/degreeSectionTitle"
+                    style="@style/filterSectionTitleStyle"
+                    android:layout_marginTop="@dimen/filter_section_title_margin_top"
+                    android:text="@string/degree"
+                    app:layout_anchor="@+id/constraintLayout"
+                    app:layout_anchorGravity="center"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/divider1" />
+
+                <com.haytham.coder.graduationproject.presentation.customViews.ToggleButtonGroupTableLayout
+                    android:id="@+id/degreeRadioGroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/filter_items_spacing"
+                    android:orientation="horizontal"
+                    app:layout_constraintTop_toBottomOf="@id/degreeSectionTitle"
+                    tools:layout_editor_absoluteX="24dp">
+
+                    <TableRow>
+
+                        <com.google.android.material.radiobutton.MaterialRadioButton
+                            android:id="@+id/bachelorRadioBtn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingEnd="@dimen/radio_button_padding_end"
+                            android:text="@string/bachelor"
+                            tools:ignore="RtlSymmetry" />
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_weight="1" />
+
+                        <com.google.android.material.radiobutton.MaterialRadioButton
+                            android:id="@+id/masterRadioBtn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingEnd="@dimen/radio_button_padding_end"
+                            android:text="@string/master"
+                            tools:ignore="RtlSymmetry" />
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_weight="1" />
+
+                    </TableRow>
+
+
+                    <TableRow>
+
+                        <com.google.android.material.radiobutton.MaterialRadioButton
+                            android:id="@+id/doctoralRadioBtn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingEnd="@dimen/radio_button_padding_end"
+                            android:text="@string/doctoral"
+                            tools:ignore="RtlSymmetry" />
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_weight="1" />
+
+                        <com.google.android.material.radiobutton.MaterialRadioButton
+                            android:id="@+id/anyDegreeRadioBtn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingEnd="@dimen/radio_button_padding_end"
+                            android:text="@string/any"
+                            tools:ignore="RtlSymmetry" />
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_weight="1" />
+                    </TableRow>
+
+
+                </com.haytham.coder.graduationproject.presentation.customViews.ToggleButtonGroupTableLayout>
+
+                <View
+                    android:id="@+id/divider2"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/filter_divider_margin_top"
+                    android:background="@color/dividerColor"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/degreeRadioGroup" />
+
+
+                <TextView
+                    android:id="@+id/collegeSectionTitle"
+                    style="@style/filterSectionTitleStyle"
+                    android:layout_marginTop="@dimen/filter_section_title_margin_top"
+                    android:text="@string/college"
+                    app:layout_anchor="@+id/constraintLayout"
+                    app:layout_anchorGravity="center"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/divider2" />
+
+                <TextView
+                    android:id="@+id/departmentText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/filter_items_spacing"
+                    android:text="@string/department"
+                    android:textSize="@dimen/spinner_title_text_size"
+                    app:layout_anchor="@+id/constraintLayout"
+                    app:layout_anchorGravity="center"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/collegeSectionTitle" />
+
+
+                <Spinner
+                    android:id="@+id/departmentSpinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spinner_and_title_spacing"
+                    android:setList="@{model.departmentNames}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/departmentText" />
+
+
+                <TextView
+                    android:id="@+id/branchText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/filter_items_spacing"
+                    android:text="@string/branch"
+                    android:textSize="@dimen/spinner_title_text_size"
+                    app:layout_anchor="@+id/constraintLayout"
+                    app:layout_anchorGravity="center"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/departmentSpinner" />
+
+                <Spinner
+                    android:id="@+id/branchSpinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spinner_and_title_spacing"
+                    android:setList="@{model.branchNames}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/branchText" />
+
+                <View
+                    android:id="@+id/divider3"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/filter_divider_margin_top"
+                    android:background="@color/dividerColor"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/branchSpinner" />
+
+
+                <TextView
+                    android:id="@+id/residenceSectionTitle"
+                    style="@style/filterSectionTitleStyle"
+                    android:layout_marginTop="@dimen/filter_section_title_margin_top"
+                    android:text="@string/residence"
+                    app:layout_anchor="@+id/constraintLayout"
+                    app:layout_anchorGravity="center"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/divider3" />
+
+
+                <TextView
+                    android:id="@+id/cityText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/filter_items_spacing"
+                    android:text="@string/city"
+                    android:textSize="@dimen/spinner_title_text_size"
+                    app:layout_anchor="@+id/constraintLayout"
+                    app:layout_anchorGravity="center"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/residenceSectionTitle" />
+
+                <Spinner
+                    android:id="@+id/citySpinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spinner_and_title_spacing"
+                    android:setList="@{model.cities}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/cityText" />
+
+                <TextView
+                    android:id="@+id/stayInCollegeText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/filter_items_spacing"
+                    android:text="@string/in_college_residence"
+                    android:textSize="@dimen/spinner_title_text_size"
+                    app:layout_anchor="@+id/constraintLayout"
+                    app:layout_anchorGravity="center"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/citySpinner" />
+
+
+                <RadioGroup
+                    android:id="@+id/stayInCollegeRadioGroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spinner_and_title_spacing"
+                    android:checkedButton="@id/anyStayInCollegeRadioBtn"
+                    android:orientation="horizontal"
+                    app:layout_constraintTop_toBottomOf="@+id/stayInCollegeText"
+                    tools:layout_editor_absoluteX="24dp">
+
+                    <com.google.android.material.radiobutton.MaterialRadioButton
+                        android:id="@+id/yesStayInCollegeRadioBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="@dimen/radio_button_padding_end"
+                        android:text="@string/yes"
+                        tools:ignore="RtlSymmetry" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+
+                    <com.google.android.material.radiobutton.MaterialRadioButton
+                        android:id="@+id/noStayInCollegeRadioBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="@dimen/radio_button_padding_end"
+                        android:text="@string/no"
+                        tools:ignore="RtlSymmetry" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+
+                    <com.google.android.material.radiobutton.MaterialRadioButton
+                        android:id="@+id/anyStayInCollegeRadioBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="@dimen/radio_button_padding_end"
+                        android:text="@string/any"
+                        tools:ignore="RtlSymmetry" />
+
+                </RadioGroup>
+
+                <View
+                    android:id="@+id/divider4"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/filter_divider_margin_top"
+                    android:background="@color/dividerColor"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/stayInCollegeRadioGroup" />
+
+                <TextView
+                    android:id="@+id/otherSectionTitle"
+                    style="@style/filterSectionTitleStyle"
+                    android:layout_marginTop="@dimen/filter_section_title_margin_top"
+                    android:text="@string/other"
+                    app:layout_anchor="@+id/constraintLayout"
+                    app:layout_anchorGravity="center"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/divider4" />
+
+                <TextView
+                    android:id="@+id/studyTimeText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/filter_items_spacing"
+                    android:text="@string/evening_college"
+                    android:textSize="@dimen/spinner_title_text_size"
+                    app:layout_anchor="@+id/constraintLayout"
+                    app:layout_anchorGravity="center"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/otherSectionTitle" />
+
+
+                <RadioGroup
+                    android:id="@+id/studyTimeRadioGroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spinner_and_title_spacing"
+                    android:checkedButton="@id/anyStudyTimeRadioBtn"
+                    android:orientation="horizontal"
+                    app:layout_constraintTop_toBottomOf="@+id/studyTimeText"
+                    tools:layout_editor_absoluteX="24dp">
+
+                    <com.google.android.material.radiobutton.MaterialRadioButton
+                        android:id="@+id/yesStudyTimeRadioBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="@dimen/radio_button_padding_end"
+                        android:text="@string/yes"
+                        tools:ignore="RtlSymmetry" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+
+                    <com.google.android.material.radiobutton.MaterialRadioButton
+                        android:id="@+id/noStudyTimeRadioBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="@dimen/radio_button_padding_end"
+                        android:text="@string/no"
+                        tools:ignore="RtlSymmetry" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+
+                    <com.google.android.material.radiobutton.MaterialRadioButton
+                        android:id="@+id/anyStudyTimeRadioBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="@dimen/radio_button_padding_end"
+                        android:text="@string/any"
+                        tools:ignore="RtlSymmetry" />
+
+                </RadioGroup>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
 
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

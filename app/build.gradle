@@ -30,9 +30,8 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-
-    dataBinding {
-        enabled = true
+    buildFeatures{
+        dataBinding= true
     }
 }
 
@@ -43,7 +42,7 @@ dependencies {
     implementation 'androidx.core:core-ktx:1.3.0'
     implementation 'com.google.android.material:material:1.1.0'
     implementation 'androidx.annotation:annotation:1.1.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-beta7'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation 'junit:junit:4.12'
@@ -53,6 +52,7 @@ dependencies {
     implementation 'com.google.android.material:material:1.3.0-alpha01'
     implementation 'androidx.navigation:navigation-fragment-ktx:2.2.2'
     implementation 'androidx.navigation:navigation-ui-ktx:2.2.2'
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.2.0"
 
 
     // circular image view
@@ -60,7 +60,7 @@ dependencies {
 
 
     // simple easy to use adapter
-    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.4'
+    //implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.4'
 
     // curved  view for profile
     implementation 'com.github.haytham-c01:CurveView:0.1.0'
@@ -69,6 +69,8 @@ dependencies {
     // firebase dependencies
     implementation 'com.google.firebase:firebase-firestore-ktx:21.4.3'
     implementation 'com.google.firebase:firebase-auth-ktx:19.3.1'
+    implementation 'com.google.firebase:firebase-storage-ktx:19.2.0'
+
     /* coroutines support for firebase operations */
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.1.1'
 
@@ -82,7 +84,12 @@ dependencies {
     kapt "com.google.dagger:hilt-android-compiler:$daggerHiltVersion"
 
     // Hilt support for view models
-    def lifecycleHiltVersion= "1.0.0-alpha01"
+    def lifecycleHiltVersion= "1.0.0-alpha02"
     implementation "androidx.hilt:hilt-lifecycle-viewmodel:$lifecycleHiltVersion"
     kapt "androidx.hilt:hilt-compiler:$lifecycleHiltVersion"
+
+    implementation 'com.jakewharton.threetenabp:threetenabp:1.2.4'
+    implementation 'com.facebook.fresco:fresco:2.3.0'
+    implementation 'com.facebook.fresco:webpsupport:2.3.0'
+
 }

@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="viewModel"
+            type="com.haytham.coder.graduationproject.domain.viewModel.HomeViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -32,32 +34,44 @@
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/logoutIcon"
+                    android:background="?attr/selectableItemBackgroundBorderless"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="12dp"
                     android:src="@drawable/ic_logout"
+                    android:onClick="@{()->viewModel.logout()}"
                     android:layout_gravity="end"/>
 
             </com.google.android.material.appbar.MaterialToolbar>
 
         </com.google.android.material.appbar.AppBarLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/studentsRecycler"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="@dimen/students_list_half_spacing"
-            android:clipToPadding="false"
-            android:clipChildren="false"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pageTitle"
-            app:spanCount="2"
-            tools:listitem="@layout/item_student"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+         <androidx.fragment.app.FragmentContainerView
+             android:id="@+id/fragmentContainerView"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             app:layout_constraintBottom_toBottomOf="parent"
+             app:layout_constraintEnd_toEndOf="parent"
+             app:layout_constraintStart_toStartOf="parent"
+             app:layout_constraintTop_toBottomOf="@+id/pageTitle"
+             app:layout_behavior="@string/appbar_scrolling_view_behavior"
+             android:layout_marginBottom="@dimen/bottom_nav_margin"/>
 
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ProgressBar
+                android:id="@+id/progressIndicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" />
+
+            <TextView
+                android:id="@+id/errorText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"/>
+        </FrameLayout>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
 

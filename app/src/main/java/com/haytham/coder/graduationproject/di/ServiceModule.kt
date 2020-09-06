@@ -1,9 +1,11 @@
 package com.haytham.coder.graduationproject.di
 
-import com.haytham.coder.graduationproject.data.network.UserService
-import com.haytham.coder.graduationproject.data.network.UserServiceImp
-import com.haytham.coder.graduationproject.domain.usecase.contract.LoginUseCase
-import com.haytham.coder.graduationproject.domain.usecase.implementation.LoginUseCaseImp
+import com.haytham.coder.graduationproject.data.remoteDataSource.contract.IAuthService
+import com.haytham.coder.graduationproject.data.remoteDataSource.contract.IBranchService
+import com.haytham.coder.graduationproject.data.remoteDataSource.contract.IStudentService
+import com.haytham.coder.graduationproject.data.remoteDataSource.implementation.FirestoreAuthService
+import com.haytham.coder.graduationproject.data.remoteDataSource.implementation.FirestoreBranchService
+import com.haytham.coder.graduationproject.data.remoteDataSource.implementation.FirestoreStudentService
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -14,7 +16,12 @@ import dagger.hilt.android.components.ActivityRetainedComponent
 interface ServiceModule {
 
     @Binds
-    fun bindUserService(userServiceImp: UserServiceImp): UserService
+    fun bindAuthService(userService: FirestoreAuthService): IAuthService
+
+    @Binds
+    fun bindUserService(studentService: FirestoreStudentService): IStudentService
 
 
+    @Binds
+    fun bindBranchService(branchService: FirestoreBranchService): IBranchService
 }

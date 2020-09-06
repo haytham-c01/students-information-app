@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="android.view.View"/>
         <variable
             name="viewModel"
             type="com.haytham.coder.graduationproject.domain.viewModel.SignUpViewModel" />
@@ -35,7 +36,7 @@
             android:src="@drawable/ic_arrow_left"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:tint="@color/colorPrimaryDark"
+            app:tint="@color/colorPrimaryDark"
             android:alpha="0.87" />
 
         <com.google.android.material.textview.MaterialTextView
@@ -61,7 +62,7 @@
             android:layout_marginTop="32dp"
             android:layout_marginBottom="32dp"
             android:src="@drawable/ic_logo"
-            app:layout_constraintBottom_toTopOf="@id/username"
+            app:layout_constraintBottom_toTopOf="@id/studentName"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toStartOf="@+id/guideline2"
             app:layout_constraintStart_toStartOf="@+id/guideline"
@@ -69,7 +70,7 @@
 
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/username"
+            android:id="@+id/studentName"
             style="@style/login_edit_text_style"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -100,9 +101,9 @@
             android:inputType="textEmailAddress"
             android:selectAllOnFocus="true"
             app:layout_constraintBottom_toTopOf="@+id/password"
-            app:layout_constraintEnd_toEndOf="@+id/username"
-            app:layout_constraintStart_toStartOf="@+id/username"
-            app:layout_constraintTop_toBottomOf="@+id/username" />
+            app:layout_constraintEnd_toEndOf="@+id/studentName"
+            app:layout_constraintStart_toStartOf="@+id/studentName"
+            app:layout_constraintTop_toBottomOf="@+id/studentName" />
 
         <com.google.android.material.textfield.TextInputEditText
             android:transitionName="@string/transition_password"
@@ -132,43 +133,44 @@
             android:text="@={viewModel.repeatPass}"
             setErrorMsg="@{viewModel.repeatPassError}"
             android:inputType="textPassword"
-            app:layout_constraintBottom_toTopOf="@id/signUpBtn"
+            app:layout_constraintBottom_toTopOf="@id/signUpBtnContainer"
             app:layout_constraintEnd_toEndOf="@+id/password"
             app:layout_constraintStart_toStartOf="@+id/password"
             app:layout_constraintTop_toBottomOf="@+id/password" />
 
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:transitionName="@string/transition_auth_btn"
-            android:id="@+id/signUpBtn"
+
+        <FrameLayout
+            android:id="@+id/signUpBtnContainer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:layout_marginBottom="48dp"
-            android:text="@string/action_sign_up"
-            android:onClick="@{()->viewModel.authenticate()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/repeatPassword"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/repeatPassword"
-            app:layout_constraintVertical_bias="0.2"
-            style="@style/authentication_btn_style" />
+            app:layout_constraintVertical_bias="0.2">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:transitionName="@string/transition_auth_btn"
+                android:id="@+id/signUpBtn"
+                android:drawableEnd="@{viewModel.isLoading()? null:@drawable/ic_arrow_right }"
+                android:onClick="@{()->viewModel.authenticate()}"
+                android:text='@{viewModel.isLoading()? "": @string/action_sign_up}'
+                style="@style/authentication_btn_style" />
 
 
-        <ProgressBar
-            android:id="@+id/loading"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="64dp"
-            android:layout_marginEnd="32dp"
-            android:layout_marginBottom="64dp"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/password"
-            app:layout_constraintStart_toStartOf="@+id/password"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.3" />
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:elevation="4dp"
+                android:indeterminateTint="@android:color/white"
+                android:visibility="@{viewModel.isLoading()? View.VISIBLE: View.GONE}" />
+        </FrameLayout>
+
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline"

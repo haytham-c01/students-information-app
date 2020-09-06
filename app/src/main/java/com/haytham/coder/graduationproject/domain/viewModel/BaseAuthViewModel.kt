@@ -3,6 +3,7 @@ package com.haytham.coder.graduationproject.domain.viewModel
 import android.app.Application
 import android.content.Context
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.haytham.coder.graduationproject.R
 import com.haytham.coder.graduationproject.utils.*
@@ -23,6 +24,9 @@ abstract class BaseAuthViewModel (
     val emailError: MutableLiveData<String> = MutableLiveData()
     val passwordError: MutableLiveData<String> = MutableLiveData()
 
+
+    protected val _isLoading:MutableLiveData<Boolean> = MutableLiveData(false)
+    val isLoading: LiveData<Boolean> = _isLoading
 
     protected open fun isDataValid(): Boolean {
 
