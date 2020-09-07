@@ -93,10 +93,12 @@ class HomeFragment : Fragment() {
 
             progressIndicator.visibility = View.GONE
             when (studentsResponse) {
-                ApiEmptyResponse ->
+                ApiEmptyResponse -> {
                     errorText.text = getString(R.string.no_students_found)
-
+                    studentsFragment.submitList(listOf())
+                }
                 is ApiSuccessResponse -> {
+                    errorText.text = ""
                     studentsFragment.submitList(studentsResponse.body)
                 }
 

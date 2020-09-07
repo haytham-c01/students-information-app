@@ -15,7 +15,6 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
-import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.tasks.await
 import java.io.ByteArrayOutputStream
 import javax.inject.Inject
@@ -33,11 +32,11 @@ class FirestoreStudentService @Inject constructor() : IStudentService {
     }
 
     @ExperimentalCoroutinesApi
-    override fun getBranchStudents(branchId: String): Flow<ApiResponse<List<NetworkStudent>>> {
+    override fun getBranchStudents(branchIds: List<String>): Flow<ApiResponse<List<NetworkStudent>>> {
         Log.d(TAG, "getStudents")
-        val branchRef = Firebase.firestore.collection(BRANCH_COL).document(branchId)
+        val branchRefs = branchIds.map { Firebase.firestore.collection(BRANCH_COL).document(it) }
             val query =
-                mStudentsCol.whereEqualTo(BRANCH_FIELD, branchRef).orderBy(STUDENT_NAME_FIELD)
+                mStudentsCol.whereIn(BRANCH_FIELD, branchRefs).orderBy(STUDENT_NAME_FIELD)
 
             return callbackFlow {
                 val listener = query.addSnapshotListener { querySnapshot, e ->

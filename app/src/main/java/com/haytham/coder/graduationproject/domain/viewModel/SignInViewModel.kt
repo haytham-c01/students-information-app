@@ -49,7 +49,7 @@ class SignInViewModel @ViewModelInject constructor(
 
             viewModelScope.launch {
                 _isLoading.postValue(true)
-                when(val authRes= loginUseCase(email, password)){
+                when(val authRes= loginUseCase(email.toLowerCase().trim(), password)){
                   is Authenticated -> _authenticatedEvent.value= Event(authRes.userModel.canWrite)
                   is AuthError -> _authErrorEvent.value= Event(authRes.errorMessage)
                 }

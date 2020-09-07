@@ -27,7 +27,7 @@ class HomeViewModel @ViewModelInject constructor(
     val students: LiveData<ApiResponse<List<StudentModel>>> = liveData{
 
         // TODO: get branch id from user
-        val studentsRes= getBranchStudentsUseCase("dhr6FP4e1WBp7ARo0rbJ")
+        val studentsRes= getBranchStudentsUseCase()
         Log.d(TAG, studentsRes.toString())
 
         emitSource(studentsRes.asLiveData())

@@ -39,7 +39,7 @@
             app:layout_anchor="@id/bottomBar"
             app:backgroundTint="@color/colorPrimary"
             android:src="@drawable/ic_add"
-            app:tint="@android:color/white"
+            app:tint="@android:color/darker_gray"
             android:visibility="gone"
             android:enabled="false"
           />

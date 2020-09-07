@@ -6,14 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import com.haytham.coder.graduationproject.R
 import com.haytham.coder.graduationproject.databinding.FragmentSplashScreenBinding
 import com.haytham.coder.graduationproject.domain.usecase.contract.IGetUserUseCase
 import com.haytham.coder.graduationproject.presentation.activity.MainActivity
 import com.haytham.coder.graduationproject.presentation.adapters.setLayoutMarginTop
-import com.haytham.coder.graduationproject.presentation.fragments.authentication.SignInFragmentDirections
 import com.haytham.coder.graduationproject.utils.AuthError
 import com.haytham.coder.graduationproject.utils.Authenticated
 import dagger.hilt.android.AndroidEntryPoint
@@ -26,6 +24,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class SplashScreenFragment() : Fragment() {
     lateinit var binding: FragmentSplashScreenBinding
+
     @Inject
     lateinit var getUserUseCase: IGetUserUseCase
 
@@ -46,14 +45,19 @@ class SplashScreenFragment() : Fragment() {
 //            binding.logo to binding.logo.transitionName,
 //        )
         viewLifecycleOwner.lifecycleScope.launch {
-            when(val authRes= getUserUseCase()){
+            when (val authRes = getUserUseCase()) {
                 is Authenticated -> {
                     if (authRes.userModel.canWrite) (activity as MainActivity).enableFab()
                     navigateToHomeScreen()
                 }
                 is AuthError -> {
-                    val action= SplashScreenFragmentDirections.actionSplashScreenFragmentToSignInFragment()
-                    findNavController().navigate(action)
+                    val action =
+                        SplashScreenFragmentDirections.actionGlobalSignInFragment()
+                    findNavController().apply {
+                        popBackStack(R.id.nav_graph, true)
+                        navigate(action)
+                    }
+
                 }
             }
 

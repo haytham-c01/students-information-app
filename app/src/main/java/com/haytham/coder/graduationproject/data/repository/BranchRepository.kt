@@ -29,8 +29,8 @@ class BranchRepository @Inject constructor(
     companion object{
         private const val TAG= "BranchRepository"
     }
-    override suspend fun getBranches(): ApiResponse<List<BranchModel>> {
-        val res= branchService.getBranches()
+    override suspend fun getBranches(branchName:String): ApiResponse<List<BranchModel>> {
+        val res= branchService.getBranches(branchName)
         Log.d(TAG, res.toString());
         return when(res){
 

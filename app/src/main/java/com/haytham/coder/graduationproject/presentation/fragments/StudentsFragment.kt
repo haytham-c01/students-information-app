@@ -79,7 +79,6 @@ class StudentsFragment(
                     (dataBinding.root.rootView as ViewGroup).showSnackBar(it)
                 }
             }
-
         }
 
         return dataBinding.root

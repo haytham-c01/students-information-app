@@ -1,6 +1,5 @@
 package com.haytham.coder.graduationproject.data.remoteDataSource.implementation
 
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.auth.ktx.userProfileChangeRequest
 import com.google.firebase.firestore.ktx.firestore
@@ -22,6 +21,8 @@ class FirestoreAuthService @Inject constructor() : IAuthService {
     companion object {
         private const val TEACHER_COL = "Teachers"
         private const val TEACHER_USERNAME_FIELD = "username"
+        private const val TEACHER_EMAIL_FIELD = "email"
+        private const val USER_NOT_REGISTERED_ERROR= "User is not registered in the Control Panel"
     }
 
     override suspend fun loginUser(email: String, password: String): AuthResponse {
@@ -29,7 +30,17 @@ class FirestoreAuthService @Inject constructor() : IAuthService {
             val result = firebaseAuth.signInWithEmailAndPassword(email, password).await()
             val firebaseUser = result.user
 
-            getUser(firebaseUser)
+            if (firebaseUser == null) {
+                 AuthError("Unknown Error")
+            }else{
+                val user= getUser(email)
+                if (user == null) {
+                    AuthError(USER_NOT_REGISTERED_ERROR)
+                } else {
+                    Authenticated(user)
+                }
+            }
+
         } catch (e: Exception) {
             AuthError(e.message ?: UNKNOWN_ERROR)
         }
@@ -41,46 +52,44 @@ class FirestoreAuthService @Inject constructor() : IAuthService {
         password: String
     ): AuthResponse {
         return try {
-            val result = firebaseAuth.createUserWithEmailAndPassword(email, password).await()
-            val firebaseUser = result.user
+            val user= getUser(email)
 
-            firebaseUser?.apply {
-                updateProfile(
-                    userProfileChangeRequest {
-                        displayName = username
-                    }
-                ).await()
-            }
-
-            val authRes = getUser(firebaseUser)
-            if (authRes is Authenticated) {
-                val user = authRes.userModel.copy(username = username)
-                mTeacherCol.document(user.userId).update(TEACHER_USERNAME_FIELD, user.username)
-                Authenticated(user)
+            if (user == null) {
+                AuthError(USER_NOT_REGISTERED_ERROR)
             } else {
-                authRes
+                val result = firebaseAuth.createUserWithEmailAndPassword(email, password).await()
+                val firebaseUser = result.user
+                firebaseUser?.apply {
+                    updateProfile(
+                        userProfileChangeRequest {
+                            displayName = username
+                        }
+                    ).await()
+                }
+
+                val updatedUser = user.copy(username = username)
+                mTeacherCol.document(updatedUser.userId).update(TEACHER_USERNAME_FIELD, updatedUser.username)
+                Authenticated(updatedUser)
             }
+
         } catch (e: Exception) {
             AuthError(e.message ?: UNKNOWN_ERROR)
         }
     }
 
-    private suspend fun getUser(firebaseUser: FirebaseUser?): AuthResponse {
-        if (firebaseUser == null) {
-            return AuthError("Unknown Error")
-        }
-        val userModel =
-            mTeacherCol.document(firebaseUser.uid).get().await().toObject(UserModel::class.java)
-        return if (userModel == null) {
-            AuthError("User is not registered in the Control Panel")
-        } else {
-            Authenticated(userModel)
-        }
+    private suspend fun getUser(email: String): UserModel? {
+        return mTeacherCol.whereEqualTo(TEACHER_EMAIL_FIELD,email).get().await().documents.firstOrNull()?.toObject(UserModel::class.java)
     }
 
     override suspend fun getCurrentUser(): AuthResponse {
-        val firebaseUser = firebaseAuth.currentUser
-        return getUser(firebaseUser)
+        val firebaseUser = firebaseAuth.currentUser ?: return AuthError("Unauthenticated")
+        val user=  getUser(firebaseUser.email.toString())
+        return if(user== null){
+            AuthError(USER_NOT_REGISTERED_ERROR)
+
+        }else{
+            Authenticated(user)
+        }
     }
 
 //    private fun FirebaseUser?.toAuthResponse(): AuthResponse {

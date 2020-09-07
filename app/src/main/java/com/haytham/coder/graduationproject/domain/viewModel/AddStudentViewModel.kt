@@ -12,7 +12,7 @@ import com.haytham.coder.graduationproject.data.model.NetworkStudent
 import com.haytham.coder.graduationproject.data.remoteDataSource.implementation.FirestoreBranchService
 import com.haytham.coder.graduationproject.domain.model.BranchModel
 import com.haytham.coder.graduationproject.domain.usecase.contract.IAddStudentUseCase
-import com.haytham.coder.graduationproject.domain.usecase.contract.IGetBranchesUseCase
+import com.haytham.coder.graduationproject.domain.usecase.contract.IGetUserBranchesUseCase
 import com.haytham.coder.graduationproject.utils.ApiEmptyResponse
 import com.haytham.coder.graduationproject.utils.ApiErrorResponse
 import com.haytham.coder.graduationproject.utils.ApiSuccessResponse
@@ -23,7 +23,7 @@ import kotlinx.coroutines.launch
 class AddStudentViewModel @ViewModelInject constructor(
     application: Application,
     private val addStudentUseCase: IAddStudentUseCase,
-    private val getBranchesUseCase: IGetBranchesUseCase
+    private val getUserBranchesUseCase: IGetUserBranchesUseCase
 ) : AndroidViewModel(application) {
 
     companion object {
@@ -39,12 +39,12 @@ class AddStudentViewModel @ViewModelInject constructor(
     var studentName: String = ""
     var studentPhone: String = ""
     var studentEmail: String = ""
-    var degree: String = "Bachelor"
+    var degree: String = c.getString(R.string.bachelor)
     var cityId: Int = 0
     var inCollegeResidence = false
     var eveningCollege = false
     var isStudent: Boolean = true
-    var stage: Int = 0;
+    var stage: Int = 1
     var graduationYear: Int = 2020
     var branchId: String = ""
     var studentImage = MutableLiveData<Bitmap>()
@@ -68,7 +68,7 @@ class AddStudentViewModel @ViewModelInject constructor(
 
     val branches: LiveData<List<BranchModel>> = liveData {
 
-        when (val res = getBranchesUseCase()) {
+        when (val res = getUserBranchesUseCase()) {
              is ApiSuccessResponse -> emit(res.body)
             is ApiErrorResponse -> {}
             is ApiEmptyResponse -> {}
@@ -135,7 +135,7 @@ class AddStudentViewModel @ViewModelInject constructor(
     }
 
     override fun toString(): String {
-        return "AddStudentViewModel(addStudentUseCase=$addStudentUseCase, getBranchesUseCase=$getBranchesUseCase, c=$c, cities=$cities, years=$years, stages=$stages, studentName='$studentName', studentPhone='$studentPhone', studentEmail='$studentEmail', degree='$degree', cityId=$cityId, inCollegeResidence=$inCollegeResidence, eveningCollege=$eveningCollege, isStudent=$isStudent, stage=$stage, graduationYear=$graduationYear, branchId='$branchId', studentNameError=$_studentNameError, studentPhoneError=$_studentPhoneError, studentEmailError=$_studentEmailError, branches=$branches, departmentNames=$departmentNames, selectedDepartment=$selectedDepartment, branchNames=$branchNames)"
+        return "AddStudentViewModel(addStudentUseCase=$addStudentUseCase, getBranchesUseCase=$getUserBranchesUseCase, c=$c, cities=$cities, years=$years, stages=$stages, studentName='$studentName', studentPhone='$studentPhone', studentEmail='$studentEmail', degree='$degree', cityId=$cityId, inCollegeResidence=$inCollegeResidence, eveningCollege=$eveningCollege, isStudent=$isStudent, stage=$stage, graduationYear=$graduationYear, branchId='$branchId', studentNameError=$_studentNameError, studentPhoneError=$_studentPhoneError, studentEmailError=$_studentEmailError, branches=$branches, departmentNames=$departmentNames, selectedDepartment=$selectedDepartment, branchNames=$branchNames)"
     }
 
 

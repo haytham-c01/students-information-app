@@ -18,31 +18,44 @@ class FirestoreBranchService @Inject constructor() : IBranchService {
     companion object {
         private const val TAG = "FirestoreBranchService"
         const val BRANCH_COL = "Branches"
-
+        const val BRANCH_NAME_FIELD = "branch"
+        const val DEPARTMENT_NAME_FIELD = "department"
     }
 
-    override suspend fun getBranch(branchId: String): ApiResponse<NetworkBranch> {
-        return try {
-            val networkBranch =
-                mBranchCol.document(branchId).get().await().toObject(NetworkBranch::class.java)
+//    override suspend fun getBranch(branchName: String): ApiResponse<NetworkBranch> {
+//        return try {
+//            val networkBranch =
+//                mBranchCol.whereEqualTo(BRANCH_NAME_FIELD, branchName).get()
+//                    .await().documents.firstOrNull()?.toObject(NetworkBranch::class.java)
+//
+//            Log.d(TAG, networkBranch.toString())
+//            if (networkBranch != null) {
+//                ApiSuccessResponse(networkBranch)
+//            } else {
+//                ApiEmptyResponse
+//            }
+//        } catch (e: Exception) {
+//            ApiErrorResponse(errorMessage = e.message ?: "Unknown error: $e")
+//        }
+//
+//    }
 
-            Log.d(TAG, networkBranch.toString())
-            if (networkBranch != null) {
-                ApiSuccessResponse(networkBranch)
-            } else {
-                ApiEmptyResponse
-            }
-        } catch (e: Exception) {
-            ApiErrorResponse(errorMessage = e.message ?: "Unknown error: $e")
+    override suspend fun getBranches(branchName: String): ApiResponse<List<NetworkBranch>> {
+        var res=  findBranch(BRANCH_NAME_FIELD, branchName)
+        if(res is ApiEmptyResponse){
+            res= findBranch(DEPARTMENT_NAME_FIELD, branchName)
         }
-
+        return res
     }
 
-    override suspend fun getBranches(): ApiResponse<List<NetworkBranch>> {
+    private suspend fun findBranch(fieldName:String, branchName: String): ApiResponse<List<NetworkBranch>> {
         return try {
             val branches =
-                mBranchCol.get().await().documents.map { it.toObject(NetworkBranch::class.java) }
+                mBranchCol.whereEqualTo(fieldName, branchName)
+                    .get()
+                    .await().documents.map { it.toObject(NetworkBranch::class.java) }
                     .requireNoNulls()
+
             Log.d(TAG, branches.toString())
 
             if (branches.isNullOrEmpty()) {

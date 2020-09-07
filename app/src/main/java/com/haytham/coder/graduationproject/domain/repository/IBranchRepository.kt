@@ -10,6 +10,6 @@ import kotlinx.coroutines.flow.Flow
 
 interface IBranchRepository {
 
-    suspend fun getBranches(): ApiResponse<List<BranchModel>>
+    suspend fun getBranches(branchName:String): ApiResponse<List<BranchModel>>
 
 }

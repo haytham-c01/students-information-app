@@ -1,32 +1,23 @@
 package com.haytham.coder.graduationproject.domain.viewModel
 
 import android.app.Application
-import android.graphics.Bitmap
 import android.util.Log
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
 import com.haytham.coder.graduationproject.R
-import com.haytham.coder.graduationproject.data.model.NetworkStudent
-import com.haytham.coder.graduationproject.data.remoteDataSource.implementation.FirestoreBranchService
 import com.haytham.coder.graduationproject.domain.model.BranchModel
 import com.haytham.coder.graduationproject.domain.model.StudentFilter
-import com.haytham.coder.graduationproject.domain.usecase.contract.IAddStudentUseCase
-import com.haytham.coder.graduationproject.domain.usecase.contract.IGetBranchesUseCase
+import com.haytham.coder.graduationproject.domain.usecase.contract.IGetUserBranchesUseCase
 import com.haytham.coder.graduationproject.domain.usecase.contract.IUpdateFilterUseCase
-import com.haytham.coder.graduationproject.domain.usecase.implementation.UpdateFilterUseCase
 import com.haytham.coder.graduationproject.utils.ApiEmptyResponse
 import com.haytham.coder.graduationproject.utils.ApiErrorResponse
 import com.haytham.coder.graduationproject.utils.ApiSuccessResponse
-import com.haytham.coder.graduationproject.utils.Event
-import kotlinx.coroutines.launch
 
 
 class FilterStudentViewModel @ViewModelInject constructor(
     application: Application,
     private val updateFilterUseCase: IUpdateFilterUseCase,
-    private val getBranchesUseCase: IGetBranchesUseCase
+    private val getUserBranchesUseCase: IGetUserBranchesUseCase
 ) : AndroidViewModel(application) {
 
     companion object {
@@ -46,7 +37,7 @@ class FilterStudentViewModel @ViewModelInject constructor(
 
     val branches: LiveData<List<BranchModel>> = liveData {
 
-        when (val res = getBranchesUseCase()) {
+        when (val res = getUserBranchesUseCase()) {
             is ApiSuccessResponse -> emit(res.body)
             is ApiErrorResponse -> {}
             is ApiEmptyResponse -> {}

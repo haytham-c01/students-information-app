@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface IStudentRepository {
 
-    suspend fun getBranchStudents(branchId:String): Flow<ApiResponse<List<StudentModel>>>
+    suspend fun getBranchStudents(branchName:String): Flow<ApiResponse<List<StudentModel>>>
     suspend fun addStudent(networkStudent: NetworkStudent, studentImage: Bitmap): ApiResponse<Unit>
     suspend fun deleteStudent(studentId: String): ApiResponse<Unit>
     fun search(keyword:String): Flow<List<StudentModel>>

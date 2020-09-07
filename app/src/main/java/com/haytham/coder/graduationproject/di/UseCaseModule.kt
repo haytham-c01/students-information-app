@@ -33,7 +33,7 @@ interface UseCaseModule {
     fun bindAddStudentUseCase(addStudentUseCase: AddStudentUseCase): IAddStudentUseCase
 
     @Binds
-    fun bindGetBranchesUseCase(getBranchesUseCase: GetBranchesUseCase): IGetBranchesUseCase
+    fun bindGetBranchesUseCase(getBranchesUseCase: GetUserBranchesUseCase): IGetUserBranchesUseCase
 
     @Binds
     fun bindDeleteStudentUseCase(deleteStudentUseCase: DeleteStudentUseCase): IDeleteStudentUseCase

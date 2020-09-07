@@ -1,5 +1,7 @@
 package com.haytham.coder.graduationproject.presentation.activity
 
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.os.Bundle
 import android.transition.TransitionManager
 import androidx.appcompat.app.AppCompatActivity
@@ -49,11 +51,17 @@ class MainActivity : AppCompatActivity(), TabLayout.OnTabSelectedListener {
     }
 
     fun enableFab() {
-        dataBinding.fab.isEnabled= true
+        dataBinding.fab.apply {
+            isEnabled= true
+            imageTintList= ColorStateList.valueOf(resources.getColor(android.R.color.white))
+        }
     }
 
     fun disableFab() {
-        dataBinding.fab.isEnabled= false
+        dataBinding.fab.apply {
+            isEnabled= false
+            imageTintList= ColorStateList.valueOf(resources.getColor(android.R.color.darker_gray))
+        }
     }
 
     val isFabEnabled get() = dataBinding.fab.isEnabled

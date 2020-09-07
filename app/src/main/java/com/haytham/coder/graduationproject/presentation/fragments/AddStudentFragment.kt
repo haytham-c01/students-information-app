@@ -65,9 +65,9 @@ class AddStudentFragment(
 
             degreeRadioGroup.setOnCheckedChangeListener { _, checkedId ->
                 viewModel.degree = when (checkedId) {
-                    R.id.bachelorRadioBtn -> "Bachelor"
-                    R.id.masterRadioBtn -> "Master"
-                    R.id.doctoralRadioBtn -> "Doctoral"
+                    R.id.bachelorRadioBtn -> requireContext().getString(R.string.bachelor)
+                    R.id.masterRadioBtn -> requireContext().getString(R.string.master)
+                    R.id.doctoralRadioBtn -> requireContext().getString(R.string.doctoral)
                     else -> ""
                 }
             }

@@ -50,7 +50,7 @@ class SignUpViewModel @ViewModelInject constructor(
         if(isDataValid()){
             viewModelScope.launch {
                 _isLoading.postValue(true)
-                when(val authRes= signUpUseCase(username, email, password)){
+                when(val authRes= signUpUseCase(username.trim(), email.toLowerCase().trim(), password)){
                   is Authenticated -> _authenticatedEvent.value= Event(true)
                   is AuthError -> _authErrorEvent.value= Event(authRes.errorMessage)
                 }

@@ -2,8 +2,8 @@ package com.haytham.coder.graduationproject.data.repository
 
 import android.graphics.Bitmap
 import android.util.Log
+import com.google.firebase.ktx.Firebase
 import com.haytham.coder.graduationproject.data.mapper.IListMapper
-import com.haytham.coder.graduationproject.data.mapper.ListMapper
 import com.haytham.coder.graduationproject.data.model.NetworkStudent
 import com.haytham.coder.graduationproject.data.model.NetworkStudentWithBranch
 import com.haytham.coder.graduationproject.data.remoteDataSource.contract.IBranchService
@@ -33,29 +33,32 @@ class StudentRepository @Inject constructor(
     private var lastBranchId = ""
     private var filter: StudentFilter? = null
 
-    override suspend fun getBranchStudents(branchId: String): Flow<ApiResponse<List<StudentModel>>> {
-        if (branchId == lastBranchId) return getFilteredStudents()
+    override suspend fun getBranchStudents(branchName: String): Flow<ApiResponse<List<StudentModel>>> {
+        if (branchName == lastBranchId) return getFilteredStudents()
 
-        val networkBranch = branchService.getBranch(branchId)
-        mCachedStudents = studentService.getBranchStudents(branchId).map {
-            Log.d(TAG, it.toString())
-            Log.d(TAG, networkBranch.toString())
-            when (it) {
-                is ApiSuccessResponse -> {
-                    when (networkBranch) {
+        mCachedStudents= when (val branchesRes = branchService.getBranches(branchName)) {
+            is ApiSuccessResponse ->{
+                studentService.getBranchStudents(branchesRes.body.map { it.branchId }.requireNoNulls()).map {
+                    Log.d(TAG, it.toString())
+                    Log.d(TAG, branchesRes.toString())
+                    when (it) {
                         is ApiSuccessResponse -> {
                             val networkStudentsWithBranch = it.body.map { networkStudent ->
-                                NetworkStudentWithBranch(networkStudent, networkBranch.body)
+                                NetworkStudentWithBranch(networkStudent,
+                                    branchesRes.body.find { networkStudent.branch?.id == it.branchId }!!
+                                )
                             }
+
                             ApiSuccessResponse(studentsMapper.map(networkStudentsWithBranch))
                         }
                         ApiEmptyResponse -> ApiEmptyResponse
-                        is ApiErrorResponse -> networkBranch
+                        is ApiErrorResponse -> it
                     }
                 }
-                ApiEmptyResponse -> ApiEmptyResponse
-                is ApiErrorResponse -> it
             }
+
+            ApiEmptyResponse -> flow { emit(ApiEmptyResponse)  }
+            is ApiErrorResponse -> flow { emit(branchesRes) }
         }
 
         return getFilteredStudents()
