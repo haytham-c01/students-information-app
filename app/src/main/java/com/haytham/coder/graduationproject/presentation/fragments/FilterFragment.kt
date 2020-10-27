@@ -1,21 +1,18 @@
 package com.haytham.coder.graduationproject.presentation.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
-import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.haytham.coder.graduationproject.R
 import com.haytham.coder.graduationproject.databinding.FragmentFilterBinding
-import com.haytham.coder.graduationproject.domain.viewModel.AddStudentViewModel
 import com.haytham.coder.graduationproject.domain.viewModel.FilterStudentViewModel
 import com.haytham.coder.graduationproject.presentation.activity.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_add_student.*
-import kotlinx.android.synthetic.main.fragment_filter.view.*
 
 @AndroidEntryPoint
 class FilterFragment : Fragment(), AdapterView.OnItemSelectedListener {
@@ -33,31 +30,31 @@ class FilterFragment : Fragment(), AdapterView.OnItemSelectedListener {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        dataBinding= FragmentFilterBinding.inflate(inflater).apply {
-            lifecycleOwner= this@FilterFragment
-            model= viewModel
-            yearSpinner.isEnabled= false
-            stageSpinner.isEnabled= false
+        dataBinding = FragmentFilterBinding.inflate(inflater).apply {
+            lifecycleOwner = this@FilterFragment
+            model = viewModel
+            yearSpinner.isEnabled = false
+            stageSpinner.isEnabled = false
             anyDegreeRadioBtn.callOnClick()
 
             stateRadioGroup.setOnCheckedChangeListener { _, checkedId ->
                 when (checkedId) {
                     R.id.graduateRadioBtn -> {
-                        viewModel.isStudent= false
-                        yearSpinner.isEnabled= true
-                        stageSpinner.isEnabled= false
+                        viewModel.isStudent = false
+                        yearSpinner.isEnabled = true
+                        stageSpinner.isEnabled = false
                         stageSpinner.setSelection(0)
                     }
                     R.id.studentRadioBtn -> {
-                        viewModel.isStudent= true
-                        stageSpinner.isEnabled= true
-                        yearSpinner.isEnabled= false
+                        viewModel.isStudent = true
+                        stageSpinner.isEnabled = true
+                        yearSpinner.isEnabled = false
                         yearSpinner.setSelection(0)
                     }
                     else -> {
-                        viewModel.isStudent= null
-                        yearSpinner.isEnabled= false
-                        stageSpinner.isEnabled= false
+                        viewModel.isStudent = null
+                        yearSpinner.isEnabled = false
+                        stageSpinner.isEnabled = false
                         yearSpinner.setSelection(0)
                         stageSpinner.setSelection(0)
                     }
@@ -65,8 +62,7 @@ class FilterFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
             }
 
-
-            degreeRadioGroup.tableOnClickListener= {
+            degreeRadioGroup.tableOnClickListener = {
                 when (degreeRadioGroup.checkedRadioButtonId) {
                     R.id.bachelorRadioBtn -> {
                         viewModel.degree = getString(R.string.bachelor)
@@ -86,13 +82,13 @@ class FilterFragment : Fragment(), AdapterView.OnItemSelectedListener {
             stayInCollegeRadioGroup.setOnCheckedChangeListener { _, checkedId ->
                 when (checkedId) {
                     R.id.yesStayInCollegeRadioBtn -> {
-                        viewModel.inCollegeResidence= true
+                        viewModel.inCollegeResidence = true
                     }
                     R.id.noStayInCollegeRadioBtn -> {
-                        viewModel.inCollegeResidence= false
+                        viewModel.inCollegeResidence = false
                     }
                     else -> {
-                        viewModel.inCollegeResidence= null
+                        viewModel.inCollegeResidence = null
                     }
                 }
             }
@@ -100,13 +96,13 @@ class FilterFragment : Fragment(), AdapterView.OnItemSelectedListener {
             studyTimeRadioGroup.setOnCheckedChangeListener { _, checkedId ->
                 when (checkedId) {
                     R.id.yesStudyTimeRadioBtn -> {
-                        viewModel.eveningCollege= true
+                        viewModel.eveningCollege = true
                     }
                     R.id.noStudyTimeRadioBtn -> {
-                        viewModel.eveningCollege= false
+                        viewModel.eveningCollege = false
                     }
                     else -> {
-                        viewModel.eveningCollege= null
+                        viewModel.eveningCollege = null
                     }
                 }
             }
@@ -126,13 +122,14 @@ class FilterFragment : Fragment(), AdapterView.OnItemSelectedListener {
         viewModel.apply {
             when (parent.id) {
                 R.id.stageSpinner -> {
-                        stage = if(id == 0L) null else id.toInt()
+                    stage = if (id == 0L) null else id.toInt()
                 }
-                R.id.yearSpinner -> graduationYear = if(id == 0L) null else yearSpinner.selectedItem.toString().toInt()
-                R.id.citySpinner ->  cityId = if(id == 0L) null else id.toInt() -1
-                R.id.departmentSpinner -> selectedDepartment.value = if(id == 0L) null else
-                departmentSpinner.selectedItem.toString()
-                R.id.branchSpinner -> branchName =if(id == 0L) null else branches.value?.find {
+                R.id.yearSpinner -> graduationYear =
+                    if (id == 0L) null else yearSpinner.selectedItem.toString().toInt()
+                R.id.citySpinner -> cityId = if (id == 0L) null else id.toInt() - 1
+                R.id.departmentSpinner -> selectedDepartment.value = if (id == 0L) null else
+                    departmentSpinner.selectedItem.toString()
+                R.id.branchSpinner -> branchName = if (id == 0L) null else branches.value?.find {
                     it.departmentName == selectedDepartment.value && it.branchName == branchSpinner.selectedItem.toString()
                 }?.branchName
             }

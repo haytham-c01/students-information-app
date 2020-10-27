@@ -16,8 +16,10 @@ fun View.afterLayoutDrawn(action: ()->Unit){
         viewTreeObserver.addOnGlobalLayoutListener(
             object:ViewTreeObserver.OnGlobalLayoutListener{
                 override fun onGlobalLayout() {
-                    action()
-                    viewTreeObserver.removeOnGlobalLayoutListener(this)
+                    if (measuredWidth > 0 && measuredHeight > 0) {
+                        viewTreeObserver.removeOnGlobalLayoutListener(this)
+                        action()
+                    }
                 }
             }
         )
