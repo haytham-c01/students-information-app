@@ -29,7 +29,6 @@ class SignInFragment : BaseAuthFragment() {
         sharedElementEnterTransition =
             TransitionInflater.from(context).inflateTransition(android.R.transition.move)
         (activity as MainActivity).hideBottomBar()
-
     }
 
     override fun onCreateView(

@@ -12,7 +12,6 @@ import com.haytham.coder.graduationproject.databinding.FragmentFilterBinding
 import com.haytham.coder.graduationproject.domain.viewModel.FilterStudentViewModel
 import com.haytham.coder.graduationproject.presentation.activity.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_add_student.*
 
 @AndroidEntryPoint
 class FilterFragment : Fragment(), AdapterView.OnItemSelectedListener {
@@ -125,12 +124,12 @@ class FilterFragment : Fragment(), AdapterView.OnItemSelectedListener {
                     stage = if (id == 0L) null else id.toInt()
                 }
                 R.id.yearSpinner -> graduationYear =
-                    if (id == 0L) null else yearSpinner.selectedItem.toString().toInt()
+                    if (id == 0L) null else dataBinding.yearSpinner.selectedItem.toString().toInt()
                 R.id.citySpinner -> cityId = if (id == 0L) null else id.toInt() - 1
                 R.id.departmentSpinner -> selectedDepartment.value = if (id == 0L) null else
-                    departmentSpinner.selectedItem.toString()
+                    dataBinding.departmentSpinner.selectedItem.toString()
                 R.id.branchSpinner -> branchName = if (id == 0L) null else branches.value?.find {
-                    it.departmentName == selectedDepartment.value && it.branchName == branchSpinner.selectedItem.toString()
+                    it.departmentName == selectedDepartment.value && it.branchName == dataBinding.branchSpinner.selectedItem.toString()
                 }?.branchName
             }
         }

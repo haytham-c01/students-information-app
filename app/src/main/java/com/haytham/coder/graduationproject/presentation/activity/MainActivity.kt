@@ -1,22 +1,18 @@
 package com.haytham.coder.graduationproject.presentation.activity
 
 import android.content.res.ColorStateList
-import android.graphics.Color
 import android.os.Bundle
 import android.transition.TransitionManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import com.google.android.material.tabs.TabLayout
 import com.haytham.coder.graduationproject.R
 import com.haytham.coder.graduationproject.databinding.ActivityMainBinding
 import com.haytham.coder.graduationproject.databinding.MenuItemBottomTabsBinding
-import com.haytham.coder.graduationproject.domain.usecase.contract.IGetUserUseCase
-import com.haytham.coder.graduationproject.utils.Authenticated
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(), TabLayout.OnTabSelectedListener {
@@ -36,11 +32,11 @@ class MainActivity : AppCompatActivity(), TabLayout.OnTabSelectedListener {
             .getItem(0)
             .actionView
 
-        val tabBarBinding = MenuItemBottomTabsBinding.bind(actionView)
-        tabBarBinding.tabs.apply {
+        val tabBarBinding = actionView?.let { MenuItemBottomTabsBinding.bind(it) }
+        tabBarBinding?.tabs?.apply {
             addOnTabSelectedListener(this@MainActivity)
 
-            findNavController(R.id.nav_host_fragment).addOnDestinationChangedListener { _, destination, _ ->
+            (dataBinding.navHostFragment as? NavHostFragment)?.navController?.addOnDestinationChangedListener { _, destination, _ ->
                 when (destination.id) {
                     R.id.homeFragment -> tabBarBinding.tabs.getTabAt(0)?.select()
                     R.id.searchFragment -> tabBarBinding.tabs.getTabAt(1)?.select()
@@ -52,15 +48,15 @@ class MainActivity : AppCompatActivity(), TabLayout.OnTabSelectedListener {
 
     fun enableFab() {
         dataBinding.fab.apply {
-            isEnabled= true
-            imageTintList= ColorStateList.valueOf(resources.getColor(android.R.color.white))
+            isEnabled = true
+            imageTintList = ColorStateList.valueOf(resources.getColor(android.R.color.white))
         }
     }
 
     fun disableFab() {
         dataBinding.fab.apply {
-            isEnabled= false
-            imageTintList= ColorStateList.valueOf(resources.getColor(android.R.color.darker_gray))
+            isEnabled = false
+            imageTintList = ColorStateList.valueOf(resources.getColor(android.R.color.darker_gray))
         }
     }
 
@@ -77,11 +73,9 @@ class MainActivity : AppCompatActivity(), TabLayout.OnTabSelectedListener {
     fun hideBottomBar() {
         dataBinding.apply {
             fab.hide()
-            bottomBar.isVisible= false
+            bottomBar.isVisible = false
         }
     }
-
-
 
     fun setupStudentAddFab() {
         dataBinding.apply {
@@ -108,10 +102,12 @@ class MainActivity : AppCompatActivity(), TabLayout.OnTabSelectedListener {
                 tab.setText(R.string.tab_home_label)
                 navController.navigate(R.id.action_global_homeFragment)
             }
+
             1 -> {
                 tab.setText(R.string.tab_search_label)
                 navController.navigate(R.id.action_global_searchFragment)
             }
+
             else -> {
                 tab.setText(R.string.tab_filter_label)
                 navController.navigate(R.id.action_global_filterFragment)

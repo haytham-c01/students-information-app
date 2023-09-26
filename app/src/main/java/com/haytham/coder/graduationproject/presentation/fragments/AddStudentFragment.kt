@@ -19,7 +19,6 @@ import com.haytham.coder.graduationproject.domain.viewModel.AddStudentViewModel
 import com.haytham.coder.graduationproject.presentation.activity.MainActivity
 import com.haytham.coder.graduationproject.utils.showSnackBar
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_add_student.*
 
 
 @AndroidEntryPoint
@@ -47,7 +46,7 @@ class AddStudentFragment(
             lifecycleOwner = this@AddStudentFragment
             model = viewModel
 
-            yearSpinner.isEnabled= false
+            yearSpinner.isEnabled = false
             stateRadioGroup.setOnCheckedChangeListener { _, checkedId ->
                 val isStudent = checkedId == R.id.studentRadioBtn
                 viewModel.isStudent = isStudent
@@ -119,8 +118,8 @@ class AddStudentFragment(
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == PICK_IMAGE && resultCode == Activity.RESULT_OK && data != null && data.data != null) {
-            val imageBitmap= uriToBitmap(data.data!!)
-            viewModel.studentImage.value= imageBitmap
+            val imageBitmap = uriToBitmap(data.data!!)
+            viewModel.studentImage.value = imageBitmap
         }
     }
 
@@ -136,12 +135,15 @@ class AddStudentFragment(
         viewModel.apply {
             when (parent.id) {
                 R.id.stageSpinner -> stage = id.toInt() + 1
-                R.id.yearSpinner -> graduationYear = yearSpinner.selectedItem.toString().toInt()
+                R.id.yearSpinner -> graduationYear =
+                    dataBinding.yearSpinner.selectedItem.toString().toInt()
+
                 R.id.citySpinner -> cityId = id.toInt()
                 R.id.departmentSpinner -> selectedDepartment.value =
-                    departmentSpinner.selectedItem.toString()
+                    dataBinding.departmentSpinner.selectedItem.toString()
+
                 R.id.branchSpinner -> branchId = branches.value?.find {
-                    it.departmentName == selectedDepartment.value && it.branchName == branchSpinner.selectedItem.toString()
+                    it.departmentName == selectedDepartment.value && it.branchName == dataBinding.branchSpinner.selectedItem.toString()
                 }?.branchId ?: ""
             }
         }

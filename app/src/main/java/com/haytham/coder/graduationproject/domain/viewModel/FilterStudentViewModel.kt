@@ -2,8 +2,11 @@ package com.haytham.coder.graduationproject.domain.viewModel
 
 import android.app.Application
 import android.util.Log
-import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.*
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.liveData
+import androidx.lifecycle.map
 import com.haytham.coder.graduationproject.R
 import com.haytham.coder.graduationproject.domain.model.BranchModel
 import com.haytham.coder.graduationproject.domain.model.StudentFilter
@@ -12,9 +15,11 @@ import com.haytham.coder.graduationproject.domain.usecase.contract.IUpdateFilter
 import com.haytham.coder.graduationproject.utils.ApiEmptyResponse
 import com.haytham.coder.graduationproject.utils.ApiErrorResponse
 import com.haytham.coder.graduationproject.utils.ApiSuccessResponse
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-
-class FilterStudentViewModel @ViewModelInject constructor(
+@HiltViewModel
+class FilterStudentViewModel @Inject constructor(
     application: Application,
     private val updateFilterUseCase: IUpdateFilterUseCase,
     private val getUserBranchesUseCase: IGetUserBranchesUseCase
@@ -24,14 +29,14 @@ class FilterStudentViewModel @ViewModelInject constructor(
         private const val TAG = "FilterStudentViewModel"
     }
 
-    private val c= application.applicationContext
-    val cities= c.resources.getStringArray(R.array.cities).toMutableList().apply {
+    private val c = application.applicationContext
+    val cities = c.resources.getStringArray(R.array.cities).toMutableList().apply {
         add(0, "Any")
     }
-    val years= (20 downTo 0).map { if(it<10 ) "200$it" else "20$it"}.toMutableList().apply {
+    val years = (20 downTo 0).map { if (it < 10) "200$it" else "20$it" }.toMutableList().apply {
         add(0, "Any")
     }
-    val stages= (1..6).map { it.toString() }.toMutableList().apply {
+    val stages = (1..6).map { it.toString() }.toMutableList().apply {
         add(0, "Any")
     }
 
@@ -49,34 +54,35 @@ class FilterStudentViewModel @ViewModelInject constructor(
             add(0, "Any")
         }
     }
-    val selectedDepartment= MutableLiveData<String?>()
+    val selectedDepartment = MutableLiveData<String?>()
     val branchNames = selectedDepartment.map {
-        val list= branches.value?.filter { it.departmentName== selectedDepartment.value }?.map { it.branchName }?: listOf()
-            list.toMutableList().apply {
-                add(0, "Any")
-            }
+        val list = branches.value?.filter { it.departmentName == selectedDepartment.value }
+            ?.map { it.branchName } ?: listOf()
+        list.toMutableList().apply {
+            add(0, "Any")
+        }
     }
 
     var degree: String? = null
     var cityId: Int? = null
-    var inCollegeResidence:Boolean?= null
-    var eveningCollege:Boolean? = null
+    var inCollegeResidence: Boolean? = null
+    var eveningCollege: Boolean? = null
     var isStudent: Boolean? = null
     var stage: Int? = null
     var graduationYear: Int? = null
-    var branchName: String?= null
+    var branchName: String? = null
 
     fun updateFilter() {
-        val filter= StudentFilter(
-            isStudent= isStudent,
-            stage= stage,
-            graduationYear= graduationYear,
-            degree= degree,
+        val filter = StudentFilter(
+            isStudent = isStudent,
+            stage = stage,
+            graduationYear = graduationYear,
+            degree = degree,
             department = selectedDepartment.value,
-            branch= branchName,
-            cityId= cityId,
-            inCollegeResidence= inCollegeResidence,
-            isEveningCollege= eveningCollege
+            branch = branchName,
+            cityId = cityId,
+            inCollegeResidence = inCollegeResidence,
+            isEveningCollege = eveningCollege
         )
 
         updateFilterUseCase(filter)
