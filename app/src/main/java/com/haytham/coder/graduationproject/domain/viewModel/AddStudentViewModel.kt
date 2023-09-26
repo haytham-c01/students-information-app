@@ -3,7 +3,6 @@ package com.haytham.coder.graduationproject.domain.viewModel
 import android.app.Application
 import android.graphics.Bitmap
 import android.util.Log
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -17,10 +16,12 @@ import com.haytham.coder.graduationproject.utils.ApiEmptyResponse
 import com.haytham.coder.graduationproject.utils.ApiErrorResponse
 import com.haytham.coder.graduationproject.utils.ApiSuccessResponse
 import com.haytham.coder.graduationproject.utils.Event
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-
-class AddStudentViewModel @ViewModelInject constructor(
+@HiltViewModel
+class AddStudentViewModel @Inject constructor(
     application: Application,
     private val addStudentUseCase: IAddStudentUseCase,
     private val getUserBranchesUseCase: IGetUserBranchesUseCase

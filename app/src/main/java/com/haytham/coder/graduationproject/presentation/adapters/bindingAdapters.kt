@@ -14,7 +14,6 @@ import androidx.databinding.BindingAdapter
 import com.facebook.drawee.view.SimpleDraweeView
 import com.google.android.material.textfield.TextInputEditText
 import com.haytham.coder.graduationproject.R
-import kotlinx.android.synthetic.main.fragment_profile.view.*
 
 @BindingAdapter("startColor", "endColor", requireAll = true)
 fun TextView.setGradient(@ColorRes startColor: Int,

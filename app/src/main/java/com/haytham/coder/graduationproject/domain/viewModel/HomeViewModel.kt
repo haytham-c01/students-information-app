@@ -2,16 +2,17 @@ package com.haytham.coder.graduationproject.domain.viewModel
 
 import android.app.Application
 import android.util.Log
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import com.haytham.coder.graduationproject.domain.model.StudentModel
 import com.haytham.coder.graduationproject.domain.usecase.contract.IGetBranchStudentsUseCase
 import com.haytham.coder.graduationproject.domain.usecase.contract.ILogoutUseCase
 import com.haytham.coder.graduationproject.utils.*
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-
-class HomeViewModel @ViewModelInject constructor(
+@HiltViewModel
+class HomeViewModel @Inject constructor(
     application: Application,
     private val getBranchStudentsUseCase: IGetBranchStudentsUseCase,
     private val logoutUseCase: ILogoutUseCase

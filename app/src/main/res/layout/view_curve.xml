@@ -4,10 +4,6 @@
     android:layout_height="250dp"
     android:elevation="4dp"
     app:endColor="@color/colorLightBlue2"
-    app:firstControlPointX="0.4"
-    app:firstControlPointY="1.2"
-    app:secondControlPointX="0.6"
-    app:secondControlPointY="1.2"
     app:startColor="@color/colorPrimary"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android" />

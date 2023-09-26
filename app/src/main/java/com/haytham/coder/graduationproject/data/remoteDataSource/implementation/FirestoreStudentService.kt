@@ -41,7 +41,7 @@ class FirestoreStudentService @Inject constructor() : IStudentService {
             return callbackFlow {
                 val listener = query.addSnapshotListener { querySnapshot, e ->
                     if (e != null) {
-                        offer(ApiErrorResponse(e.message ?: "Unknown error: $e"))
+                        trySend(ApiErrorResponse(e.message ?: "Unknown error: $e"))
                         close()
                     }
 
@@ -55,12 +55,12 @@ class FirestoreStudentService @Inject constructor() : IStudentService {
                         //Log.d(TAG, notNullStudents.toString())
 
                         if (notNullStudents.isNotEmpty()) {
-                            offer(ApiSuccessResponse(notNullStudents))
+                            trySend(ApiSuccessResponse(notNullStudents))
                         } else {
-                            offer(ApiEmptyResponse)
+                            trySend(ApiEmptyResponse)
                         }
                     } else {
-                        offer(ApiEmptyResponse)
+                        trySend(ApiEmptyResponse)
                     }
                 }
 
